@@ -5,3 +5,4 @@ sqlalchemy
 aiosqlite
 python-dotenv
 httpx
+greenlet
