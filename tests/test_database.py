@@ -38,8 +38,10 @@ async def test_sighting_model_creation(db_setup):
         "shape": "disk",
         "duration": "5 minutes",
         "summary": "Bright disk-shaped object hovering silently",
-        "text": ("I was driving home when I saw a bright, disk-shaped object "
-                 "hovering silently above the highway..."),
+        "text": (
+            "I was driving home when I saw a bright, disk-shaped object "
+            "hovering silently above the highway..."
+        ),
         "posted": datetime.now(UTC),
         "latitude": 33.3943,
         "longitude": -104.5230,
