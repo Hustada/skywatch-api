@@ -9,7 +9,7 @@ class SightingResponse(BaseModel):
     id: int
     date_time: datetime = Field(..., description="Date and time of the sighting")
     city: str = Field(..., description="City where sighting occurred")
-    state: str = Field(..., description="Two-letter state code")
+    state: Optional[str] = Field(None, description="State/province code (US states or international)")
     shape: str = Field(..., description="Shape of the observed object")
     duration: str = Field(..., description="Duration of the sighting")
     summary: str = Field(..., description="Brief summary of the sighting")
@@ -43,7 +43,7 @@ class SightingListResponse(BaseModel):
 class SightingFilters(BaseModel):
     """Query parameters for filtering sightings."""
 
-    state: Optional[str] = Field(None, description="Filter by state (2-letter code)")
+    state: Optional[str] = Field(None, description="Filter by state/province code")
     city: Optional[str] = Field(None, description="Filter by city name")
     shape: Optional[str] = Field(None, description="Filter by object shape")
     date_from: Optional[datetime] = Field(

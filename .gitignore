@@ -41,3 +41,7 @@ data/*.csv
 data/*.json
 *.db
 *.sqlite
+
+# Large data files
+docs/*.csv
+*.zip

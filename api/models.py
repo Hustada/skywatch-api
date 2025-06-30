@@ -22,7 +22,7 @@ class Sighting(Base):
     # Core sighting information
     date_time: Mapped[datetime] = mapped_column(DateTime, nullable=False, index=True)
     city: Mapped[str] = mapped_column(String(100), nullable=False, index=True)
-    state: Mapped[str] = mapped_column(String(2), nullable=False, index=True)
+    state: Mapped[Optional[str]] = mapped_column(String(10), nullable=True, index=True)
     shape: Mapped[str] = mapped_column(String(50), nullable=False, index=True)
     duration: Mapped[str] = mapped_column(String(100), nullable=False)
     summary: Mapped[str] = mapped_column(Text, nullable=False)

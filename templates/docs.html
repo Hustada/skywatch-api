@@ -1,0 +1,716 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SkyWatch API Documentation</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;
+            background-color: #ffffff;
+            color: #374151;
+            line-height: 1.6;
+        }
+
+        .container {
+            display: flex;
+            min-height: 100vh;
+        }
+
+        /* Sidebar Navigation */
+        .sidebar {
+            width: 280px;
+            background-color: #fafafa;
+            border-right: 1px solid #e5e7eb;
+            padding: 24px 0;
+            position: fixed;
+            height: 100vh;
+            overflow-y: auto;
+        }
+
+        .sidebar-header {
+            padding: 0 24px 24px 24px;
+            border-bottom: 1px solid #e5e7eb;
+        }
+
+        .sidebar-title {
+            font-size: 18px;
+            font-weight: 600;
+            color: #1a1a1a;
+            margin-bottom: 8px;
+        }
+
+        .sidebar-subtitle {
+            font-size: 14px;
+            color: #6b7280;
+        }
+
+        .nav-section {
+            margin-top: 32px;
+        }
+
+        .nav-section-title {
+            font-size: 12px;
+            font-weight: 600;
+            color: #6b7280;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            padding: 0 24px 12px 24px;
+        }
+
+        .nav-item {
+            display: block;
+            padding: 8px 24px;
+            color: #374151;
+            text-decoration: none;
+            font-size: 14px;
+            border-left: 3px solid transparent;
+            transition: all 0.2s ease;
+        }
+
+        .nav-item:hover {
+            background-color: #f3f4f6;
+            color: #1a1a1a;
+        }
+
+        .nav-item.active {
+            background-color: #fff7ed;
+            color: #cc5500;
+            border-left-color: #cc5500;
+            font-weight: 500;
+        }
+
+        /* Main Content */
+        .main-content {
+            margin-left: 280px;
+            flex: 1;
+            padding: 40px 60px;
+            max-width: calc(100% - 280px);
+        }
+
+        .header {
+            margin-bottom: 60px;
+            padding-bottom: 40px;
+            border-bottom: 1px solid #e5e7eb;
+        }
+
+        .title {
+            font-size: 48px;
+            font-weight: 600;
+            color: #1a1a1a;
+            margin-bottom: 16px;
+            letter-spacing: -0.025em;
+        }
+
+        .description {
+            font-size: 20px;
+            color: #6b7280;
+            margin-bottom: 24px;
+            line-height: 1.5;
+        }
+
+        .version-badge {
+            background-color: #f3f4f6;
+            color: #374151;
+            padding: 6px 12px;
+            border-radius: 6px;
+            font-size: 14px;
+            font-weight: 500;
+            display: inline-block;
+        }
+
+        .base-url {
+            background-color: #1a1a1a;
+            color: #ffffff;
+            padding: 16px 20px;
+            border-radius: 8px;
+            font-family: "SF Mono", Monaco, monospace;
+            font-size: 14px;
+            margin: 24px 0;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .attribution {
+            background-color: #fff7ed;
+            border: 1px solid #fed7aa;
+            border-radius: 8px;
+            padding: 16px 20px;
+            margin: 24px 0 40px 0;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .attribution-icon {
+            font-size: 20px;
+        }
+
+        .attribution-text {
+            color: #9a3412;
+            font-size: 14px;
+            line-height: 1.5;
+        }
+
+        .attribution-link {
+            color: #cc5500;
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .attribution-link:hover {
+            text-decoration: underline;
+        }
+
+        .copy-btn {
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: #ffffff;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 12px;
+            cursor: pointer;
+        }
+
+        /* Section Headers */
+        .section {
+            margin: 60px 0;
+        }
+
+        .section-title {
+            font-size: 32px;
+            font-weight: 600;
+            color: #1a1a1a;
+            margin-bottom: 16px;
+        }
+
+        .section-description {
+            font-size: 16px;
+            color: #6b7280;
+            margin-bottom: 32px;
+        }
+
+        /* Endpoint Cards */
+        .endpoint {
+            background: #ffffff;
+            border: 1px solid #e5e7eb;
+            border-radius: 12px;
+            margin-bottom: 24px;
+            overflow: hidden;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+            transition: all 0.2s ease;
+        }
+
+        .endpoint:hover {
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            border-color: #cc5500;
+        }
+
+        .endpoint-header {
+            padding: 24px;
+            background: #ffffff;
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            cursor: pointer;
+        }
+
+        .method-badge {
+            padding: 8px 12px;
+            border-radius: 6px;
+            font-size: 12px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            min-width: 60px;
+            text-align: center;
+        }
+
+        .method-get {
+            background-color: #059669;
+            color: #ffffff;
+        }
+
+        .method-post {
+            background-color: #cc5500;
+            color: #ffffff;
+        }
+
+        .endpoint-path {
+            font-family: "SF Mono", Monaco, monospace;
+            font-size: 16px;
+            font-weight: 500;
+            color: #1a1a1a;
+            flex: 1;
+        }
+
+        .endpoint-description {
+            color: #6b7280;
+            font-size: 14px;
+            max-width: 300px;
+        }
+
+        .endpoint-details {
+            background: #f9fafb;
+            border-top: 1px solid #e5e7eb;
+            padding: 32px;
+            display: none;
+        }
+
+        .endpoint-details.active {
+            display: block;
+        }
+
+        .parameters {
+            margin-bottom: 32px;
+        }
+
+        .parameters-title {
+            font-size: 18px;
+            font-weight: 600;
+            color: #1a1a1a;
+            margin-bottom: 16px;
+        }
+
+        .parameter {
+            margin-bottom: 16px;
+            padding: 16px;
+            background: #ffffff;
+            border: 1px solid #e5e7eb;
+            border-radius: 8px;
+        }
+
+        .parameter-name {
+            font-family: "SF Mono", Monaco, monospace;
+            font-size: 14px;
+            font-weight: 600;
+            color: #1a1a1a;
+            margin-bottom: 4px;
+        }
+
+        .parameter-type {
+            color: #cc5500;
+            font-size: 12px;
+            font-weight: 500;
+            margin-left: 8px;
+        }
+
+        .parameter-description {
+            color: #6b7280;
+            font-size: 14px;
+        }
+
+        .response-example {
+            margin-top: 24px;
+        }
+
+        .response-title {
+            font-size: 18px;
+            font-weight: 600;
+            color: #1a1a1a;
+            margin-bottom: 16px;
+        }
+
+        .code-block {
+            background-color: #1a1a1a;
+            color: #f9fafb;
+            border-radius: 8px;
+            padding: 20px;
+            font-family: "SF Mono", Monaco, monospace;
+            font-size: 14px;
+            line-height: 1.5;
+            overflow-x: auto;
+        }
+
+        /* Try it out */
+        .try-it-section {
+            background: #ffffff;
+            border: 1px solid #e5e7eb;
+            border-radius: 8px;
+            padding: 24px;
+            margin: 24px 0;
+        }
+
+        .try-it-title {
+            font-size: 16px;
+            font-weight: 600;
+            color: #1a1a1a;
+            margin-bottom: 16px;
+        }
+
+        .input-group {
+            margin-bottom: 16px;
+        }
+
+        .input-label {
+            display: block;
+            font-size: 14px;
+            font-weight: 500;
+            color: #374151;
+            margin-bottom: 4px;
+        }
+
+        .input-field {
+            width: 100%;
+            padding: 8px 12px;
+            border: 1px solid #d1d5db;
+            border-radius: 6px;
+            font-size: 14px;
+        }
+
+        .input-field:focus {
+            border-color: #cc5500;
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(204, 85, 0, 0.1);
+        }
+
+        .try-btn {
+            background-color: #cc5500;
+            color: #ffffff;
+            border: 1px solid #cc5500;
+            padding: 10px 20px;
+            border-radius: 6px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .try-btn:hover {
+            background-color: #b54600;
+            transform: translateY(-1px);
+            box-shadow: 0 4px 8px rgba(204, 85, 0, 0.3);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .sidebar {
+                transform: translateX(-100%);
+                transition: transform 0.3s ease;
+            }
+            
+            .main-content {
+                margin-left: 0;
+                max-width: 100%;
+                padding: 20px;
+            }
+            
+            .title {
+                font-size: 36px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Sidebar Navigation -->
+        <nav class="sidebar">
+            <div class="sidebar-header">
+                <div class="sidebar-title">SkyWatch API</div>
+                <div class="sidebar-subtitle">Documentation</div>
+            </div>
+            
+            <div class="nav-section">
+                <div class="nav-section-title">Getting Started</div>
+                <a href="#overview" class="nav-item active">Overview</a>
+                <a href="#authentication" class="nav-item">Authentication</a>
+                <a href="#errors" class="nav-item">Errors</a>
+            </div>
+            
+            <div class="nav-section">
+                <div class="nav-section-title">Resources</div>
+                <a href="#health" class="nav-item">Health Check</a>
+                <a href="#sightings" class="nav-item">UFO Sightings</a>
+            </div>
+            
+            <div class="nav-section">
+                <div class="nav-section-title">Reference</div>
+                <a href="#schemas" class="nav-item">Schemas</a>
+                <a href="#rate-limits" class="nav-item">Rate Limits</a>
+            </div>
+        </nav>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <div class="header">
+                <h1 class="title">SkyWatch API</h1>
+                <p class="description">
+                    A RESTful API for querying UFO sighting reports. Data sourced from the National UFO Reporting Center (NUFORC).
+                </p>
+                <span class="version-badge">Version 1.0.0</span>
+                
+                <div class="base-url">
+                    <span>https://api.skywatch.dev</span>
+                    <button class="copy-btn" onclick="copyToClipboard('https://api.skywatch.dev')">Copy</button>
+                </div>
+
+                <div class="attribution">
+                    <div class="attribution-icon">🛸</div>
+                    <div class="attribution-text">
+                        Data provided by the <a href="https://nuforc.org" target="_blank" class="attribution-link">National UFO Reporting Center (NUFORC)</a>. 
+                        NUFORC has been collecting UFO sighting reports since 1974 and maintains the world's largest database of UFO encounters.
+                    </div>
+                </div>
+            </div>
+
+            <!-- Health Check Section -->
+            <section id="health" class="section">
+                <h2 class="section-title">Health Check</h2>
+                <p class="section-description">Check the API health status and database connectivity.</p>
+                
+                <div class="endpoint">
+                    <div class="endpoint-header" onclick="toggleEndpoint('health-endpoint')">
+                        <span class="method-badge method-get">GET</span>
+                        <span class="endpoint-path">/health</span>
+                        <span class="endpoint-description">Get API health status</span>
+                    </div>
+                    
+                    <div id="health-endpoint" class="endpoint-details">
+                        <div class="response-example">
+                            <h4 class="response-title">Response</h4>
+                            <div class="code-block">{
+  "status": "healthy",
+  "version": "1.0.0",
+  "timestamp": "2023-12-15T10:30:00Z",
+  "database": {
+    "status": "connected",
+    "sighting_count": 10
+  }
+}</div>
+                        </div>
+                        
+                        <div class="try-it-section">
+                            <h4 class="try-it-title">Try it out</h4>
+                            <button class="try-btn" onclick="tryRequest('/health', 'GET')">Send Request</button>
+                            <div id="health-response" style="margin-top: 16px;"></div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Sightings Section -->
+            <section id="sightings" class="section">
+                <h2 class="section-title">UFO Sightings</h2>
+                <p class="section-description">Retrieve and filter UFO sighting reports with pagination support.</p>
+                
+                <!-- List Sightings -->
+                <div class="endpoint">
+                    <div class="endpoint-header" onclick="toggleEndpoint('list-sightings')">
+                        <span class="method-badge method-get">GET</span>
+                        <span class="endpoint-path">/v1/sightings</span>
+                        <span class="endpoint-description">List UFO sightings with filtering</span>
+                    </div>
+                    
+                    <div id="list-sightings" class="endpoint-details">
+                        <div class="parameters">
+                            <h4 class="parameters-title">Query Parameters</h4>
+                            
+                            <div class="parameter">
+                                <div class="parameter-name">state <span class="parameter-type">string</span></div>
+                                <div class="parameter-description">Filter by US state (2-letter code)</div>
+                            </div>
+                            
+                            <div class="parameter">
+                                <div class="parameter-name">city <span class="parameter-type">string</span></div>
+                                <div class="parameter-description">Filter by city name</div>
+                            </div>
+                            
+                            <div class="parameter">
+                                <div class="parameter-name">shape <span class="parameter-type">string</span></div>
+                                <div class="parameter-description">Filter by object shape</div>
+                            </div>
+                            
+                            <div class="parameter">
+                                <div class="parameter-name">page <span class="parameter-type">integer</span></div>
+                                <div class="parameter-description">Page number (default: 1)</div>
+                            </div>
+                            
+                            <div class="parameter">
+                                <div class="parameter-name">per_page <span class="parameter-type">integer</span></div>
+                                <div class="parameter-description">Records per page (1-100, default: 25)</div>
+                            </div>
+                        </div>
+                        
+                        <div class="response-example">
+                            <h4 class="response-title">Response</h4>
+                            <div class="code-block">{
+  "sightings": [
+    {
+      "id": 1,
+      "date_time": "2023-12-15T20:30:00",
+      "city": "Roswell",
+      "state": "NM",
+      "shape": "disk",
+      "duration": "5 minutes",
+      "summary": "Bright disk-shaped object hovering silently",
+      "text": "I was driving home from work when I noticed...",
+      "posted": "2023-12-16T10:15:00",
+      "latitude": 33.3943,
+      "longitude": -104.523
+    }
+  ],
+  "total": 10,
+  "page": 1,
+  "per_page": 25,
+  "pages": 1
+}</div>
+                        </div>
+                        
+                        <div class="try-it-section">
+                            <h4 class="try-it-title">Try it out</h4>
+                            <div class="input-group">
+                                <label class="input-label">State (optional)</label>
+                                <input type="text" class="input-field" id="state-filter" placeholder="AZ">
+                            </div>
+                            <div class="input-group">
+                                <label class="input-label">City (optional)</label>
+                                <input type="text" class="input-field" id="city-filter" placeholder="Phoenix">
+                            </div>
+                            <div class="input-group">
+                                <label class="input-label">Shape (optional)</label>
+                                <input type="text" class="input-field" id="shape-filter" placeholder="disk">
+                            </div>
+                            <button class="try-btn" onclick="trySightingsRequest()">Send Request</button>
+                            <div id="sightings-response" style="margin-top: 16px;"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Get Single Sighting -->
+                <div class="endpoint">
+                    <div class="endpoint-header" onclick="toggleEndpoint('get-sighting')">
+                        <span class="method-badge method-get">GET</span>
+                        <span class="endpoint-path">/v1/sightings/{id}</span>
+                        <span class="endpoint-description">Get a specific UFO sighting</span>
+                    </div>
+                    
+                    <div id="get-sighting" class="endpoint-details">
+                        <div class="parameters">
+                            <h4 class="parameters-title">Path Parameters</h4>
+                            
+                            <div class="parameter">
+                                <div class="parameter-name">id <span class="parameter-type">integer</span></div>
+                                <div class="parameter-description">Unique sighting ID</div>
+                            </div>
+                        </div>
+                        
+                        <div class="response-example">
+                            <h4 class="response-title">Response</h4>
+                            <div class="code-block">{
+  "id": 1,
+  "date_time": "2023-12-15T20:30:00",
+  "city": "Roswell",
+  "state": "NM",
+  "shape": "disk",
+  "duration": "5 minutes",
+  "summary": "Bright disk-shaped object hovering silently",
+  "text": "I was driving home from work when I noticed a bright, metallic disk-shaped object hovering about 500 feet above the highway...",
+  "posted": "2023-12-16T10:15:00",
+  "latitude": 33.3943,
+  "longitude": -104.523
+}</div>
+                        </div>
+                        
+                        <div class="try-it-section">
+                            <h4 class="try-it-title">Try it out</h4>
+                            <div class="input-group">
+                                <label class="input-label">Sighting ID</label>
+                                <input type="number" class="input-field" id="sighting-id" placeholder="1">
+                            </div>
+                            <button class="try-btn" onclick="trySingleSightingRequest()">Send Request</button>
+                            <div id="single-sighting-response" style="margin-top: 16px;"></div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <script>
+        function toggleEndpoint(id) {
+            const element = document.getElementById(id);
+            element.classList.toggle('active');
+        }
+
+        function copyToClipboard(text) {
+            navigator.clipboard.writeText(text);
+        }
+
+        async function tryRequest(endpoint, method = 'GET') {
+            try {
+                const response = await fetch(endpoint);
+                const data = await response.json();
+                document.getElementById('health-response').innerHTML = 
+                    `<div class="code-block">${JSON.stringify(data, null, 2)}</div>`;
+            } catch (error) {
+                document.getElementById('health-response').innerHTML = 
+                    `<div style="color: #dc2626;">Error: ${error.message}</div>`;
+            }
+        }
+
+        async function trySightingsRequest() {
+            const state = document.getElementById('state-filter').value;
+            const city = document.getElementById('city-filter').value;
+            const shape = document.getElementById('shape-filter').value;
+            
+            let url = '/v1/sightings?';
+            const params = [];
+            if (state) params.push(`state=${encodeURIComponent(state)}`);
+            if (city) params.push(`city=${encodeURIComponent(city)}`);
+            if (shape) params.push(`shape=${encodeURIComponent(shape)}`);
+            url += params.join('&');
+            
+            try {
+                const response = await fetch(url);
+                const data = await response.json();
+                document.getElementById('sightings-response').innerHTML = 
+                    `<div class="code-block">${JSON.stringify(data, null, 2)}</div>`;
+            } catch (error) {
+                document.getElementById('sightings-response').innerHTML = 
+                    `<div style="color: #dc2626;">Error: ${error.message}</div>`;
+            }
+        }
+
+        async function trySingleSightingRequest() {
+            const id = document.getElementById('sighting-id').value;
+            if (!id) {
+                document.getElementById('single-sighting-response').innerHTML = 
+                    `<div style="color: #dc2626;">Please enter a sighting ID</div>`;
+                return;
+            }
+            
+            try {
+                const response = await fetch(`/v1/sightings/${id}`);
+                const data = await response.json();
+                document.getElementById('single-sighting-response').innerHTML = 
+                    `<div class="code-block">${JSON.stringify(data, null, 2)}</div>`;
+            } catch (error) {
+                document.getElementById('single-sighting-response').innerHTML = 
+                    `<div style="color: #dc2626;">Error: ${error.message}</div>`;
+            }
+        }
+
+        // Smooth scrolling for navigation
+        document.querySelectorAll('.nav-item').forEach(item => {
+            item.addEventListener('click', (e) => {
+                e.preventDefault();
+                const target = document.querySelector(item.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth' });
+                    
+                    // Update active state
+                    document.querySelectorAll('.nav-item').forEach(nav => nav.classList.remove('active'));
+                    item.classList.add('active');
+                }
+            });
+        });
+    </script>
+</body>
+</html>
