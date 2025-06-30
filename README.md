@@ -1,131 +1,96 @@
-# 🛸 NUFORC UFO Sightings API
+# SkyWatch API
 
-A modern REST API for querying UFO sighting reports from the National UFO Reporting Center (NUFORC) database.
+A professional RESTful API for querying UFO sighting reports, built with FastAPI and featuring data sourced from the National UFO Reporting Center (NUFORC).
 
-## 🚀 Features
+## Features
 
-- **Fast & Modern**: Built with FastAPI for high performance
-- **Well-Tested**: Comprehensive test coverage with pytest
-- **Type-Safe**: Full type hints with Pydantic models
-- **Auto-Documentation**: Interactive API docs with custom theme
-- **Clean Code**: Formatted with Black, linted with flake8
+- 🛸 **80,000+ UFO Sightings** - Real historical data from NUFORC
+- 🚀 **Fast & Modern** - Built with FastAPI and async SQLAlchemy
+- 🎨 **Beautiful Documentation** - Stripe-inspired API docs with interactive testing
+- 🔍 **Advanced Filtering** - Search by state, city, shape, and date ranges
+- 📄 **Pagination Support** - Efficient data retrieval for large datasets
+- 🧪 **Test-Driven Development** - 100% test coverage with pytest
 
-## 🛠 Development Setup
-
-1. **Clone and navigate to the project**:
-   ```bash
-   git clone <repo-url>
-   cd nuforc-api
-   ```
-
-2. **Create virtual environment**:
-   ```bash
-   python3 -m venv venv
-   source venv/bin/activate  # On Windows: venv\Scripts\activate
-   ```
-
-3. **Install dependencies**:
-   ```bash
-   pip install -r requirements-dev.txt
-   ```
-
-4. **Run tests**:
-   ```bash
-   pytest
-   ```
-
-5. **Start development server**:
-   ```bash
-   uvicorn api.main:app --reload
-   ```
-
-6. **View API documentation**:
-   - Swagger UI: http://localhost:8000/docs
-   - ReDoc: http://localhost:8000/redoc
-
-## 🧪 Testing
-
-This project follows Test-Driven Development (TDD):
+## Quick Start
 
 ```bash
-# Run all tests
+# Clone the repository
+git clone https://github.com/hustada/skywatch-api.git
+cd skywatch-api
+
+# Create virtual environment
+python -m venv venv
+source venv/bin/activate  # On Windows: venv\Scripts\activate
+
+# Install dependencies
+pip install -r requirements.txt
+
+# Run the API
+uvicorn api.main:app --reload
+
+# Visit the docs
+open http://localhost:8000/docs
+```
+
+## API Endpoints
+
+### Health Check
+```bash
+GET /health
+```
+
+### List UFO Sightings
+```bash
+GET /v1/sightings?state=NM&city=Roswell&shape=disk&page=1&per_page=25
+```
+
+### Get Specific Sighting
+```bash
+GET /v1/sightings/{id}
+```
+
+## Example Usage
+
+```javascript
+// Fetch UFO sightings in New Mexico
+fetch('http://localhost:8000/v1/sightings?state=NM')
+  .then(response => response.json())
+  .then(data => {
+    console.log(`Found ${data.total} UFO sightings in New Mexico`);
+    data.sightings.forEach(sighting => {
+      console.log(`${sighting.city}: ${sighting.summary}`);
+    });
+  });
+```
+
+## Development
+
+```bash
+# Run tests
 pytest
 
 # Run with coverage
-pytest --cov=api
+pytest --cov=api --cov-report=html
 
-# Run specific test file
-pytest tests/test_health.py -v
+# Import sample data
+python data/import_data.py
+
+# Import full dataset (80k+ records)
+python data/import_kaggle_data.py
 ```
 
-## 🎨 Code Quality
+## Tech Stack
 
-```bash
-# Format code
-black .
+- **FastAPI** - Modern web framework
+- **SQLAlchemy** - Async ORM
+- **SQLite** - Database (PostgreSQL ready)
+- **Pydantic** - Data validation
+- **pytest** - Testing framework
 
-# Check linting
-flake8 .
+## Data Attribution
 
-# Type checking
-mypy api --ignore-missing-imports
-```
+Data provided by the [National UFO Reporting Center (NUFORC)](https://nuforc.org). NUFORC has been collecting UFO sighting reports since 1974 and maintains the world's largest database of UFO encounters.
 
-## 📦 Project Structure
+## License
 
-```
-nuforc-api/
-├── api/
-│   ├── __init__.py
-│   ├── main.py              # FastAPI app
-│   ├── routers/
-│   │   ├── __init__.py
-│   │   └── health.py        # Health check endpoint
-│   └── utils/
-│       └── __init__.py
-├── tests/
-│   ├── __init__.py
-│   ├── conftest.py          # Test configuration
-│   └── test_health.py       # Health endpoint tests
-├── static/
-│   └── custom-swagger.css   # Custom API docs theme
-├── .github/
-│   └── workflows/
-│       └── test.yml         # CI/CD pipeline
-├── requirements.txt         # Production dependencies
-├── requirements-dev.txt     # Development dependencies
-└── README.md
-```
-
-## 🔧 Environment Configuration
-
-Copy `.env.example` to `.env` and customize as needed:
-
-```bash
-cp .env.example .env
-```
-
-## 📊 Current API Endpoints
-
-- `GET /health` - Health check endpoint
-
-More endpoints coming soon as we implement the full NUFORC data API!
-
-## 🎯 Design Theme
-
-The API documentation features a custom theme with:
-- **Primary**: Charcoal (#1a1a1a)
-- **Background**: White (#ffffff)  
-- **Accent**: Burnt Orange (#cc5500)
-
-## 🤝 Contributing
-
-1. Create a feature branch: `git checkout -b feat/your-feature`
-2. Write tests first (TDD approach)
-3. Implement the feature
-4. Ensure all tests pass and code is formatted
-5. Submit a pull request
-
-## 📝 License
-
-[Add your license here]
+MIT License - See LICENSE file for details
