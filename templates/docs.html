@@ -1561,7 +1561,7 @@
                                     <p style="margin: 0 0 12px 0; font-size: 12px; color: #047857;">Please copy your API key now. You won't be able to see it again.</p>
                                     <div style="background: #1a1a1a; border-radius: 6px; padding: 12px; font-family: monospace; color: #f9fafb; font-size: 13px; word-break: break-all; position: relative;">
                                         <span id="newApiKeyValue"></span>
-                                        <button onclick="copyNewApiKey()" style="position: absolute; top: 8px; right: 8px; background: rgba(255,255,255,0.2); border: 1px solid rgba(255,255,255,0.3); color: white; padding: 4px 8px; border-radius: 4px; font-size: 11px; cursor: pointer;">Copy</button>
+                                        <button onclick="copyNewApiKey(event)" style="position: absolute; top: 8px; right: 8px; background: rgba(255,255,255,0.2); border: 1px solid rgba(255,255,255,0.3); color: white; padding: 4px 8px; border-radius: 4px; font-size: 11px; cursor: pointer;">Copy</button>
                                     </div>
                                     <button class="btn-outline" onclick="hideNewApiKey()" style="margin-top: 12px;">I've saved my key</button>
                                 </div>
@@ -1771,15 +1771,15 @@
                     
                     <div class="output-section" id="outputSection" style="display: none;">
                         <div class="output-tabs">
-                            <button class="output-tab active" onclick="showTab('url')">URL</button>
-                            <button class="output-tab" onclick="showTab('curl')">cURL</button>
-                            <button class="output-tab" onclick="showTab('javascript')">JavaScript</button>
-                            <button class="output-tab" onclick="showTab('python')">Python</button>
-                            <button class="output-tab" onclick="showTab('php')">PHP</button>
+                            <button class="output-tab active" onclick="showTab('url', event)">URL</button>
+                            <button class="output-tab" onclick="showTab('curl', event)">cURL</button>
+                            <button class="output-tab" onclick="showTab('javascript', event)">JavaScript</button>
+                            <button class="output-tab" onclick="showTab('python', event)">Python</button>
+                            <button class="output-tab" onclick="showTab('php', event)">PHP</button>
                         </div>
                         
                         <div class="output-content">
-                            <button class="copy-button" onclick="copyOutput()">Copy</button>
+                            <button class="copy-button" onclick="copyOutput(event)">Copy</button>
                             <pre id="outputCode"></pre>
                         </div>
                         
@@ -2909,7 +2909,7 @@ $data = json_decode($json, true);
                                     <div class="api-key-details">${key.tier} • ${key.quota_used}/${key.quota_limit} requests used</div>
                                 </div>
                                 <div class="api-key-actions">
-                                    <button class="btn-outline btn-copy" onclick="regenerateAndCopyApiKey(${key.id})" title="Generate new key and copy">Regenerate</button>
+                                    <button class="btn-outline btn-copy" onclick="regenerateAndCopyApiKey(${key.id}, event)" title="Generate new key and copy">Regenerate</button>
                                     <button class="btn-outline btn-delete" onclick="deleteApiKey(${key.id})" title="Delete this API key">Delete</button>
                                 </div>
                             </div>
