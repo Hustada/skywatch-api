@@ -256,9 +256,6 @@ class UFOMap {
                     <strong>Description:</strong><br>
                     <em>${sighting.summary}</em>
                 </div>
-                <div style="font-size: 12px; color: #666; margin-bottom: 8px;">
-                    Reported: ${new Date(sighting.posted).toLocaleDateString()}
-                </div>
                 <button class="popup-research-btn" onclick="researchSighting(${sighting.id}, '${sighting.city}, ${sighting.state}')">
                     🔍 AI Research This Sighting
                 </button>
