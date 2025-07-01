@@ -156,15 +156,16 @@ async def get_map_data(
     if filters:
         query = query.where(and_(*filters))
     
-    # Order by date for consistent results
-    query = query.order_by(Sighting.date_time.desc())
+    # For map visualization, we want a good time distribution
+    # Remove strict date ordering to get a better sample across all time periods
     
-    # Apply smart limiting based on zoom level
+    # Apply smart limiting based on zoom level and request
     if zoom_level:
-        limit = min(10000, max(100, zoom_level * 200))
+        limit = min(15000, max(100, zoom_level * 200))
         query = query.limit(limit)
     else:
-        query = query.limit(5000)  # Default reasonable limit
+        # Allow larger datasets for map visualization, but still reasonable limit
+        query = query.limit(15000)  # Increased from 5000 to show more data
     
     # Execute query
     result = await db.execute(query)

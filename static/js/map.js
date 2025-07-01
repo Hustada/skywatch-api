@@ -28,14 +28,14 @@ class UFOMap {
             // Load available states for dropdown
             await this.loadStates();
             
-            // Load initial data
-            await this.loadData();
-            
             // Set up event listeners
             this.setupEventListeners();
             
-            // Apply default date range (last year)
+            // Set default date range inputs
             this.setDefaultDateRange();
+            
+            // Load initial data (with default filters applied)
+            await this.loadData();
             
         } catch (error) {
             console.error('Failed to initialize map:', error);
@@ -282,17 +282,20 @@ class UFOMap {
             this.map.removeLayer(this.heatmapLayer);
         }
 
-        // Create new heatmap
+        // Create new heatmap with improved visibility
         if (heatmapData.length > 0) {
             this.heatmapLayer = L.heatLayer(heatmapData, {
-                radius: 20,
-                blur: 15,
-                maxZoom: 17,
+                radius: 35,           // Increased from 20 for larger hotspots
+                blur: 25,             // Increased from 15 for smoother blending
+                maxZoom: 18,          // Allow heatmap to show at higher zoom levels
+                minOpacity: 0.4,      // Set minimum opacity so faint areas are still visible
                 gradient: {
-                    0.0: 'blue',
-                    0.5: 'lime',
-                    0.7: 'yellow',
-                    1.0: 'red'
+                    0.0: 'rgba(0, 0, 255, 0.6)',      // Semi-transparent blue
+                    0.2: 'rgba(0, 255, 255, 0.7)',    // Cyan
+                    0.4: 'rgba(0, 255, 0, 0.8)',      // Green  
+                    0.6: 'rgba(255, 255, 0, 0.9)',    // Yellow
+                    0.8: 'rgba(255, 165, 0, 0.9)',    // Orange
+                    1.0: 'rgba(255, 0, 0, 1.0)'       // Bright red
                 }
             }).addTo(this.map);
         }
@@ -320,14 +323,17 @@ class UFOMap {
             shapeCounts[shape] = (shapeCounts[shape] || 0) + 1;
         });
         
-        const mostCommonShape = Object.keys(shapeCounts).reduce((a, b) => 
-            shapeCounts[a] > shapeCounts[b] ? a : b, '-'
-        );
+        let mostCommonShape = '-';
+        if (Object.keys(shapeCounts).length > 0) {
+            mostCommonShape = Object.keys(shapeCounts).reduce((a, b) => 
+                shapeCounts[a] > shapeCounts[b] ? a : b
+            );
+        }
 
         // Calculate date range
         let dateRange = '-';
         if (this.filteredData.length > 0) {
-            const dates = this.filteredData.map(s => new Date(s.date_time)).sort();
+            const dates = this.filteredData.map(s => new Date(s.date_time)).sort((a, b) => a - b);
             const earliest = dates[0].getFullYear();
             const latest = dates[dates.length - 1].getFullYear();
             dateRange = earliest === latest ? earliest.toString() : `${earliest}-${latest}`;
@@ -371,13 +377,11 @@ class UFOMap {
     }
 
     setDefaultDateRange() {
-        const today = new Date();
-        const oneYearAgo = new Date();
-        oneYearAgo.setFullYear(today.getFullYear() - 1);
-        
-        document.getElementById('date-from').value = oneYearAgo.toISOString().split('T')[0];
-        document.getElementById('date-to').value = today.toISOString().split('T')[0];
-        document.getElementById('date-preset').value = '365';
+        // Start with no date filter - show all sightings by default
+        // Users can apply date filters if they want to narrow down
+        document.getElementById('date-from').value = '';
+        document.getElementById('date-to').value = '';
+        document.getElementById('date-preset').value = 'all';
     }
 
     showLoading(show) {
