@@ -169,6 +169,7 @@ class APIKeyMiddleware:
     def _is_public_endpoint(self, path: str) -> bool:
         """Check if endpoint is public (doesn't require API key)."""
         public_endpoints = [
+            "/",                  # Landing page
             "/health",
             "/docs",
             "/redoc",
