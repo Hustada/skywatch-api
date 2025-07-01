@@ -43,7 +43,7 @@
             width: 320px;
             background-color: #fafafa;
             border-right: 1px solid #e5e7eb;
-            padding: 20px;
+            padding: 20px 20px 100px 20px;
             overflow-y: auto;
             z-index: 1000;
             position: relative;
@@ -85,8 +85,8 @@
         .form-label {
             display: block;
             font-size: 12px;
-            font-weight: 500;
-            color: #6b7280;
+            font-weight: 600;
+            color: #374151;
             margin-bottom: 4px;
         }
 
@@ -96,6 +96,8 @@
             border: 1px solid #d1d5db;
             border-radius: 6px;
             font-size: 14px;
+            font-weight: 500;
+            color: #1f2937;
             background: white;
         }
 
@@ -108,7 +110,7 @@
         .date-inputs {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 8px;
+            gap: 12px;
         }
 
         .btn {
@@ -311,13 +313,13 @@
 
             <!-- View Toggle -->
             <div class="filter-section">
-                <div class="filter-title">View Mode</div>
+                <div class="filter-title">Map Display</div>
                 <div class="view-toggles">
                     <button class="toggle-btn active" id="markers-btn" onclick="setViewMode('markers')">
-                        Markers
+                        📍 Markers
                     </button>
                     <button class="toggle-btn" id="heatmap-btn" onclick="setViewMode('heatmap')">
-                        Heatmap
+                        🔥 Heat Map
                     </button>
                 </div>
             </div>
@@ -328,11 +330,11 @@
                 <div class="form-group">
                     <div class="date-inputs">
                         <div>
-                            <label class="form-label">From</label>
+                            <label class="form-label">From Date</label>
                             <input type="date" id="date-from" class="form-input">
                         </div>
                         <div>
-                            <label class="form-label">To</label>
+                            <label class="form-label">To Date</label>
                             <input type="date" id="date-to" class="form-input">
                         </div>
                     </div>
