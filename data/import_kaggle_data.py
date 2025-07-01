@@ -177,10 +177,16 @@ async def import_kaggle_dataset(filename: str = "scrubbed.csv", limit: Optional[
                 
                 # Parse coordinates
                 try:
-                    latitude = float(row.get('latitude', '')) if row.get('latitude') else None
-                    longitude = float(row.get('longitude', '')) if row.get('longitude') else None
+                    lat_str = row.get('latitude', '').strip()
+                    latitude = float(lat_str) if lat_str else None
                 except (ValueError, TypeError):
-                    latitude = longitude = None
+                    latitude = None
+                
+                try:
+                    lng_str = (row.get('longitude', '') or row.get('longitude ', '')).strip()
+                    longitude = float(lng_str) if lng_str else None
+                except (ValueError, TypeError):
+                    longitude = None
                 
                 # Parse duration
                 duration = parse_duration(row.get('duration (hours/min)', '') or row.get('duration (seconds)', ''))
