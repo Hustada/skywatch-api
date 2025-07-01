@@ -86,6 +86,13 @@ app.mount("/static", StaticFiles(directory="static"), name="static")
 templates = Jinja2Templates(directory="templates")
 
 
+# Landing page
+@app.get("/", include_in_schema=False)
+async def landing_page(request: Request):
+    """SkyWatch API landing page."""
+    return templates.TemplateResponse("landing.html", {"request": request})
+
+
 # Custom docs endpoint with Stripe-inspired design
 @app.get("/docs", include_in_schema=False)
 async def custom_docs(request: Request):
