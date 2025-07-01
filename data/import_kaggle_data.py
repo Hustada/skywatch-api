@@ -11,6 +11,7 @@ import re
 from sqlalchemy import text
 from api.database import get_db_session, create_tables
 from api.models import Sighting
+from api.utils.geography import correct_state_from_coordinates
 
 
 def parse_datetime(datetime_str: str) -> Optional[datetime]:
@@ -190,6 +191,15 @@ async def import_kaggle_dataset(filename: str = "scrubbed.csv", limit: Optional[
                 
                 # Parse duration
                 duration = parse_duration(row.get('duration (hours/min)', '') or row.get('duration (seconds)', ''))
+                
+                # Correct state assignment based on coordinates
+                if latitude is not None and longitude is not None:
+                    corrected_state = correct_state_from_coordinates(latitude, longitude, state)
+                    if corrected_state != state:
+                        # Log corrections for interesting cases
+                        if state and len(state) == 2:
+                            print(f"Corrected state: {state} → {corrected_state or 'INTERNATIONAL'} for {city} ({latitude}, {longitude})")
+                    state = corrected_state
                 
                 # Create summary from first 100 characters of comments
                 summary = comments[:100] + "..." if len(comments) > 100 else comments
