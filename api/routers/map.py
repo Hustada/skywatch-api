@@ -21,7 +21,6 @@ router = APIRouter(prefix="/v1/map", tags=["map"])
     description="Retrieve sighting data optimized for map display with optional clustering.",
 )
 async def get_map_data(
-    api_key: CurrentApiKey,
     # Filtering parameters
     state: Optional[str] = Query(None, description="Filter by state"),
     city: Optional[str] = Query(None, description="Filter by city name"),
@@ -114,7 +113,6 @@ async def get_map_data(
     description="Retrieve aggregated statistics for geographic hotspots.",
 )
 async def get_hotspots(
-    api_key: CurrentApiKey,
     # Filtering parameters
     state: Optional[str] = Query(None, description="Filter by state"),
     shape: Optional[str] = Query(None, description="Filter by object shape"),
@@ -202,7 +200,6 @@ async def get_hotspots(
     description="Get overall statistics for map visualization.",
 )
 async def get_map_stats(
-    api_key: CurrentApiKey,
     state: Optional[str] = Query(None, description="Filter by state"),
     shape: Optional[str] = Query(None, description="Filter by object shape"),
     date_from: Optional[datetime] = Query(None, description="Filter from date"),

@@ -41,19 +41,9 @@ class UFOMap {
     }
 
     async checkAuthRequirement() {
-        // Try to make a request without API key first
-        try {
-            const response = await fetch('/v1/sightings?per_page=1');
-            if (response.status === 401) {
-                // API key required, try to get one from localStorage or prompt
-                this.apiKey = localStorage.getItem('ufo_api_key');
-                if (!this.apiKey) {
-                    this.promptForApiKey();
-                }
-            }
-        } catch (error) {
-            console.warn('Could not check auth requirement:', error);
-        }
+        // For the map, we'll use public endpoints that don't require auth
+        // This makes the map accessible to everyone
+        console.log('Map using public endpoints - no authentication required');
     }
 
     promptForApiKey() {
@@ -110,19 +100,10 @@ class UFOMap {
             if (filters.state) params.append('state', filters.state);
             if (filters.city) params.append('city', filters.city);
 
-            // Add API key if required
-            const headers = {};
-            if (this.apiKey) {
-                headers['X-API-Key'] = this.apiKey;
-            }
-
-            const response = await fetch(`/v1/sightings?${params}`, { headers });
+            // Use public map API endpoint
+            const response = await fetch(`/v1/map/data?format=simple&${params}`);
             
             if (!response.ok) {
-                if (response.status === 401) {
-                    this.promptForApiKey();
-                    return this.loadData(filters);
-                }
                 throw new Error(`HTTP ${response.status}: ${response.statusText}`);
             }
 
