@@ -108,9 +108,13 @@
         }
 
         .date-inputs {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
+            display: flex;
             gap: 12px;
+        }
+        
+        .date-inputs > div {
+            flex: 1;
+            min-width: 0;
         }
 
         .btn {
