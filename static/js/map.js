@@ -256,9 +256,12 @@ class UFOMap {
                     <strong>Description:</strong><br>
                     <em>${sighting.summary}</em>
                 </div>
-                <div style="font-size: 12px; color: #666;">
+                <div style="font-size: 12px; color: #666; margin-bottom: 8px;">
                     Reported: ${new Date(sighting.posted).toLocaleDateString()}
                 </div>
+                <button class="popup-research-btn" onclick="researchSighting(${sighting.id}, '${sighting.city}, ${sighting.state}')">
+                    🔍 AI Research This Sighting
+                </button>
             </div>
         `;
     }
@@ -485,3 +488,238 @@ function toggleSidebar() {
     const sidebar = document.getElementById('sidebar');
     sidebar.classList.toggle('open');
 }
+
+// Research functionality
+let currentSighting = null;
+let currentQuickAnalysis = null;
+let researchCache = new Map();
+
+async function researchSighting(sightingId, location) {
+    currentSighting = { id: sightingId, location: location };
+    currentQuickAnalysis = null;
+    
+    // Check cache first
+    const cacheKey = `quick_${sightingId}`;
+    if (researchCache.has(cacheKey)) {
+        const cachedResult = researchCache.get(cacheKey);
+        showResearchModal(cachedResult, true);
+        return;
+    }
+    
+    // Show modal with loading state
+    showResearchModal(null, false);
+    
+    try {
+        // For now, let's use a test API key - we'll improve this later
+        const response = await fetch(`/v1/research/quick/${sightingId}`, {
+            headers: {
+                'X-API-Key': 'sk_live_aff5306db031a32f565953b83f0b11418b0c4a965c09a5196e93f65cdc84a41f'
+            }
+        });
+        
+        if (!response.ok) {
+            if (response.status === 401) {
+                throw new Error('Authentication required. Please contact administrator for access.');
+            }
+            throw new Error(`Research service unavailable (${response.status})`);
+        }
+        
+        const result = await response.json();
+        currentQuickAnalysis = result;
+        
+        // Cache the result
+        researchCache.set(cacheKey, result);
+        
+        // Show the result
+        showResearchModal(result, true);
+        
+    } catch (error) {
+        console.error('Research error:', error);
+        showResearchError(error.message);
+    }
+}
+
+async function getFullResearch() {
+    if (!currentSighting) return;
+    
+    const cacheKey = `full_${currentSighting.id}`;
+    if (researchCache.has(cacheKey)) {
+        const cachedResult = researchCache.get(cacheKey);
+        showFullResearchResult(cachedResult);
+        return;
+    }
+    
+    // Show loading state for full research
+    showFullResearchLoading();
+    
+    try {
+        const response = await fetch(`/v1/research/sighting/${currentSighting.id}`, {
+            headers: {
+                'X-API-Key': 'sk_live_aff5306db031a32f565953b83f0b11418b0c4a965c09a5196e93f65cdc84a41f'
+            }
+        });
+        
+        if (!response.ok) {
+            throw new Error(`Research service unavailable (${response.status})`);
+        }
+        
+        const result = await response.json();
+        
+        // Cache the result
+        researchCache.set(cacheKey, result);
+        
+        // Show the result
+        showFullResearchResult(result);
+        
+    } catch (error) {
+        console.error('Full research error:', error);
+        showResearchError(error.message);
+    }
+}
+
+function showResearchModal(result, showActions) {
+    const modal = document.getElementById('research-modal');
+    const modalBody = document.getElementById('research-modal-body');
+    const actions = document.getElementById('research-actions');
+    
+    if (!result) {
+        // Show loading state
+        modalBody.innerHTML = `
+            <div class="research-loading">
+                <div class="research-loading-spinner"></div>
+                <div class="research-loading-text">Analyzing UFO sighting with AI...</div>
+            </div>
+        `;
+        actions.style.display = 'none';
+    } else {
+        // Show quick analysis result
+        modalBody.innerHTML = `
+            <div class="research-quick-analysis">
+                <div class="research-quick-title">
+                    🤖 Quick AI Analysis
+                    <span style="font-size: 12px; font-weight: normal; color: #6b7280;">
+                        ${currentSighting.location}
+                    </span>
+                </div>
+                ${formatQuickAnalysis(result.quick_analysis)}
+            </div>
+        `;
+        
+        if (showActions) {
+            actions.style.display = 'flex';
+            document.getElementById('full-research-btn').disabled = false;
+        }
+    }
+    
+    modal.classList.add('active');
+    document.body.style.overflow = 'hidden';
+}
+
+function showFullResearchLoading() {
+    const modalBody = document.getElementById('research-modal-body');
+    modalBody.innerHTML = `
+        <div class="research-loading">
+            <div class="research-loading-spinner"></div>
+            <div class="research-loading-text">Generating comprehensive research report...</div>
+            <div style="font-size: 12px; color: #9ca3af; margin-top: 8px;">
+                This may take 10-15 seconds
+            </div>
+        </div>
+    `;
+    
+    // Disable the button
+    document.getElementById('full-research-btn').disabled = true;
+}
+
+function showFullResearchResult(result) {
+    const modalBody = document.getElementById('research-modal-body');
+    
+    modalBody.innerHTML = `
+        <div class="research-quick-analysis">
+            <div class="research-quick-title">
+                🛸 Comprehensive Research Report
+                <span style="font-size: 12px; font-weight: normal; color: #6b7280;">
+                    ${currentSighting.location}
+                </span>
+            </div>
+            <div class="research-content">
+                ${formatResearchReport(result.research_report)}
+            </div>
+            ${result.citations && result.citations.length > 0 ? `
+                <div style="margin-top: 20px; padding-top: 16px; border-top: 1px solid #e5e7eb;">
+                    <h3>Sources & Citations</h3>
+                    ${result.citations.map(citation => `
+                        <div style="margin-bottom: 8px; font-size: 12px;">
+                            <strong>${citation.title}</strong><br>
+                            <a href="${citation.url}" target="_blank" style="color: #cc5500;">${citation.url}</a>
+                        </div>
+                    `).join('')}
+                </div>
+            ` : ''}
+        </div>
+    `;
+}
+
+function showResearchError(message) {
+    const modalBody = document.getElementById('research-modal-body');
+    const actions = document.getElementById('research-actions');
+    
+    modalBody.innerHTML = `
+        <div class="research-error">
+            <div class="research-error-icon">⚠️</div>
+            <div class="research-error-title">Research Unavailable</div>
+            <div class="research-error-message">${message}</div>
+            <button class="research-btn research-btn-primary" onclick="closeResearchModal()">
+                Close
+            </button>
+        </div>
+    `;
+    
+    actions.style.display = 'none';
+}
+
+function formatQuickAnalysis(analysis) {
+    // Simple formatting - convert line breaks and basic markdown-style formatting
+    return analysis
+        .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
+        .replace(/\*(.*?)\*/g, '<em>$1</em>')
+        .replace(/\n\n/g, '</p><p>')
+        .replace(/\n/g, '<br>')
+        .replace(/^/, '<p>')
+        .replace(/$/, '</p>')
+        .replace(/(<p>)?(\d+\.\s.*?)(<\/p>|$)/g, '<p><strong>$2</strong></p>');
+}
+
+function formatResearchReport(report) {
+    // Enhanced formatting for the full research report
+    return report
+        .replace(/\*\*(.*?)\*\*/g, '<h3>$1</h3>')
+        .replace(/\*(.*?)\*/g, '<em>$1</em>')
+        .replace(/\n\n/g, '</p><p>')
+        .replace(/\n/g, '<br>')
+        .replace(/^/, '<p>')
+        .replace(/$/, '</p>')
+        .replace(/^<p>(<h3>.*?<\/h3>)/gm, '$1<p>')
+        .replace(/(<\/h3>)<\/p>/g, '$1');
+}
+
+function closeResearchModal() {
+    const modal = document.getElementById('research-modal');
+    modal.classList.remove('active');
+    document.body.style.overflow = '';
+}
+
+// Close modal when clicking outside
+document.addEventListener('click', function(event) {
+    const modal = document.getElementById('research-modal');
+    if (event.target === modal) {
+        closeResearchModal();
+    }
+});
+
+// Close modal with Escape key
+document.addEventListener('keydown', function(event) {
+    if (event.key === 'Escape') {
+        closeResearchModal();
+    }
+});

@@ -181,6 +181,7 @@ class APIKeyMiddleware:
             "/v1/auth/login",     # Public login
             "/v1/auth/me",        # JWT token auth (web UI)
             "/v1/auth/keys",      # JWT token auth (web UI)
+            "/v1/research/status", # Public research status check
         ]
         
         for public_path in public_endpoints:

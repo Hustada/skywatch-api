@@ -45,6 +45,9 @@ class Settings:
     # Redis (for future use)
     REDIS_URL: Optional[str] = os.getenv("REDIS_URL")
     
+    # AI Research
+    GEMINI_API_KEY: Optional[str] = os.getenv("GEMINI_API_KEY")
+    
     def __init__(self):
         """Validate critical settings on initialization."""
         if self.ENVIRONMENT == "production" and self.JWT_SECRET_KEY == "your-secret-key-here":

@@ -10,7 +10,7 @@ from fastapi.middleware.trustedhost import TrustedHostMiddleware
 from fastapi.exceptions import RequestValidationError
 from starlette.middleware.base import BaseHTTPMiddleware
 from starlette.exceptions import HTTPException as StarletteHTTPException
-from api.routers import health, sightings, auth, map
+from api.routers import health, sightings, auth, map, research
 from api.database import create_tables
 from api.middleware import APIKeyMiddleware
 from api.config import settings
@@ -120,3 +120,4 @@ app.include_router(health.router)
 app.include_router(auth.router)
 app.include_router(sightings.router)
 app.include_router(map.router)
+app.include_router(research.router)
