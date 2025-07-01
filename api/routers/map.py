@@ -16,6 +16,64 @@ router = APIRouter(prefix="/v1/map", tags=["map"])
 
 
 @router.get(
+    "/states",
+    summary="Get available US states",
+    description="Retrieve list of US states that have UFO sightings in the database.",
+)
+async def get_available_states(
+    db: AsyncSession = Depends(get_db),
+):
+    """Get list of US states with sighting data."""
+    
+    # Query for US states (2-letter codes) with sighting counts
+    query = select(
+        Sighting.state,
+        func.count(Sighting.id).label('sighting_count')
+    ).where(
+        Sighting.state.isnot(None),
+        func.length(Sighting.state) == 2  # Filter to US states only
+    ).group_by(Sighting.state).order_by(Sighting.state)
+    
+    result = await db.execute(query)
+    states_data = result.all()
+    
+    # US state names mapping
+    us_states = {
+        'AL': 'Alabama', 'AK': 'Alaska', 'AZ': 'Arizona', 'AR': 'Arkansas',
+        'CA': 'California', 'CO': 'Colorado', 'CT': 'Connecticut', 'DE': 'Delaware',
+        'FL': 'Florida', 'GA': 'Georgia', 'HI': 'Hawaii', 'ID': 'Idaho',
+        'IL': 'Illinois', 'IN': 'Indiana', 'IA': 'Iowa', 'KS': 'Kansas',
+        'KY': 'Kentucky', 'LA': 'Louisiana', 'ME': 'Maine', 'MD': 'Maryland',
+        'MA': 'Massachusetts', 'MI': 'Michigan', 'MN': 'Minnesota', 'MS': 'Mississippi',
+        'MO': 'Missouri', 'MT': 'Montana', 'NE': 'Nebraska', 'NV': 'Nevada',
+        'NH': 'New Hampshire', 'NJ': 'New Jersey', 'NM': 'New Mexico', 'NY': 'New York',
+        'NC': 'North Carolina', 'ND': 'North Dakota', 'OH': 'Ohio', 'OK': 'Oklahoma',
+        'OR': 'Oregon', 'PA': 'Pennsylvania', 'RI': 'Rhode Island', 'SC': 'South Carolina',
+        'SD': 'South Dakota', 'TN': 'Tennessee', 'TX': 'Texas', 'UT': 'Utah',
+        'VT': 'Vermont', 'VA': 'Virginia', 'WA': 'Washington', 'WV': 'West Virginia',
+        'WI': 'Wisconsin', 'WY': 'Wyoming', 'DC': 'District of Columbia',
+        'AS': 'American Samoa', 'GU': 'Guam', 'MP': 'Northern Mariana Islands',
+        'PR': 'Puerto Rico', 'VI': 'Virgin Islands'
+    }
+    
+    # Format response with state names
+    states = []
+    for state_data in states_data:
+        state_code = state_data.state
+        state_name = us_states.get(state_code, state_code)
+        states.append({
+            'code': state_code,
+            'name': state_name,
+            'sighting_count': state_data.sighting_count
+        })
+    
+    return {
+        'states': states,
+        'total_states': len(states)
+    }
+
+
+@router.get(
     "/data",
     summary="Get map visualization data",
     description="Retrieve sighting data optimized for map display with optional clustering.",
@@ -56,7 +114,18 @@ async def get_map_data(
     filters = []
     
     if state:
-        filters.append(Sighting.state == state.upper())
+        if state.upper() == "US":
+            # Show only US states (2-letter codes)
+            filters.append(Sighting.state.isnot(None))
+            filters.append(func.length(Sighting.state) == 2)
+        elif state.upper() == "INTERNATIONAL":
+            # Show only international sightings (non-US or null states)
+            filters.append(
+                (Sighting.state.is_(None)) | (func.length(Sighting.state) != 2)
+            )
+        else:
+            # Show specific state
+            filters.append(Sighting.state == state.upper())
     
     if city:
         filters.append(Sighting.city.ilike(f"%{city}%"))
@@ -143,7 +212,18 @@ async def get_hotspots(
     filters = []
     
     if state:
-        filters.append(Sighting.state == state.upper())
+        if state.upper() == "US":
+            # Show only US states (2-letter codes)
+            filters.append(Sighting.state.isnot(None))
+            filters.append(func.length(Sighting.state) == 2)
+        elif state.upper() == "INTERNATIONAL":
+            # Show only international sightings (non-US or null states)
+            filters.append(
+                (Sighting.state.is_(None)) | (func.length(Sighting.state) != 2)
+            )
+        else:
+            # Show specific state
+            filters.append(Sighting.state == state.upper())
     
     if shape:
         filters.append(Sighting.shape.ilike(f"%{shape}%"))
@@ -218,7 +298,18 @@ async def get_map_stats(
     filters = []
     
     if state:
-        filters.append(Sighting.state == state.upper())
+        if state.upper() == "US":
+            # Show only US states (2-letter codes)
+            filters.append(Sighting.state.isnot(None))
+            filters.append(func.length(Sighting.state) == 2)
+        elif state.upper() == "INTERNATIONAL":
+            # Show only international sightings (non-US or null states)
+            filters.append(
+                (Sighting.state.is_(None)) | (func.length(Sighting.state) != 2)
+            )
+        else:
+            # Show specific state
+            filters.append(Sighting.state == state.upper())
     
     if shape:
         filters.append(Sighting.shape.ilike(f"%{shape}%"))

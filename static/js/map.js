@@ -25,6 +25,9 @@ class UFOMap {
             // Initialize map
             this.initMap();
             
+            // Load available states for dropdown
+            await this.loadStates();
+            
             // Load initial data
             await this.loadData();
             
@@ -83,6 +86,35 @@ class UFOMap {
 
         // Add cluster group to map
         this.map.addLayer(this.clusterGroup);
+    }
+
+    async loadStates() {
+        try {
+            const response = await fetch('/v1/map/states');
+            if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
+            }
+            
+            const data = await response.json();
+            const stateSelect = document.getElementById('state-filter');
+            
+            // Clear existing state options (keep the first 4 options)
+            while (stateSelect.children.length > 4) {
+                stateSelect.removeChild(stateSelect.lastChild);
+            }
+            
+            // Add states to dropdown
+            data.states.forEach(state => {
+                const option = document.createElement('option');
+                option.value = state.code;
+                option.textContent = `${state.name} (${state.sighting_count})`;
+                stateSelect.appendChild(option);
+            });
+            
+        } catch (error) {
+            console.error('Failed to load states:', error);
+            // Continue without state data - user can still use basic filtering
+        }
     }
 
     async loadData(filters = {}) {

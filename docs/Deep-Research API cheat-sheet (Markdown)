@@ -1,0 +1,106 @@
+# Deep‑Research AI APIs (July 2025)
+
+*A cheat‑sheet for calling multi‑hop, source‑grounded “research agents” from your code.*
+
+| Provider | API / Flag | What it does | Typical latency / cost† | Best‑fit scenarios |
+|----------|------------|--------------|-------------------------|--------------------|
+| Perplexity **Sonar Deep Research** | `POST https://api.perplexity.ai/answer` with `mode="deep"` and an optional `steps` knob | Launches an agent that issues dozens of web searches, filters results, reads pages, and streams back a fully‑cited answer. | 4–10 s • ≈ $0.002–0.006 per request | Competitive‑intel briefs, tech/market landscape reports, blog‑length drafts |
+| Google **Gemini 2.5** (Pro / Flash) | Vertex AI Studio & REST with `search_grounding=true` + optional `thinking_budget` | Model autonomously browses the web, cites sources and PDF pages, and returns JSON with citations. | 2–6 s • $0.0011–0.0018 per 1 k input tokens (Flash) | Long‑context doc Q&A, knowledge bots, controlled “thinking spend” workflows |
+| OpenAI **Responses API** (beta) | `POST https://api.openai.com/v1/responses` (includes Web Search & Document Search tools) | Operator model plans tool calls, fetches live pages & private docs, and returns a citation‑array answer. | 3–8 s • GPT‑4.5 rates + $0.001 per external search hit | Customer‑support agents, policy/legal memos that must cite live sources |
+| **Consensus API** | `POST https://consensus.app/api/v1/search` | Retrieves top peer‑reviewed papers matching a query; returns structured metadata & relevance scores. (No LLM answer—your code summarizes.) | <1 s • ≈ $0.01 per call | Health‑claim fact‑checking, systematic reviews, evidence‑backed content |
+| **Nomic Atlas Retrieval + Analyst** | `/query` + optional *Atlas Analyst* agent | Hybrid+vector search over **your** corpus; Analyst reasons over hits and yields explainable answers. Self‑host or SaaS. | Query ~100 ms • Analyst 2–5 s • self‑host ≈ $30/ M docs | RAG on proprietary data, interactive data‑exploration dashboards |
+
+†Published list prices as of **July 1 2025**; always check vendor pages for updates.
+
+---
+
+## Quick‑start code snippets
+
+### Perplexity Sonar Deep Research
+
+```python
+import requests, os, json
+resp = requests.post(
+  "https://api.perplexity.ai/answer",
+  headers={"Authorization": f"Bearer {os.getenv('PPLX_KEY')}"},
+  json={
+    "query": "economic impact of small modular reactors",
+    "mode": "deep",
+    "steps": 9        # depth knob: 3–12 typical
+  },
+  stream=True        # stream chunks
+)
+for chunk in resp.iter_lines():
+    print(chunk.decode())
+```
+
+### Google Gemini 2.5 (Vertex AI)
+
+```python
+from vertexai.preview.generative_models import GenerativeModel
+
+model = GenerativeModel("gemini-2-5-pro")
+response = model.generate_content(
+    "Summarize recent graphene battery breakthroughs.",
+    generation_config={
+        "search_grounding": True,
+        "thinking_budget": 25_000   # tokens to spend “thinking”
+    }
+)
+print(response.text)
+```
+
+### OpenAI Responses API
+
+```python
+from openai import OpenAI
+client = OpenAI()
+
+resp = client.responses.create(
+    model="gpt-4o-responses-preview",
+    task="Draft a brief on Nebraska’s 2025 property‑tax proposals with citations.",
+    tools=[{"type": "web_search"}, {"type": "document_search"}]
+)
+print(resp.output.text)
+for c in resp.output.citations:
+    print(c.url)
+```
+
+---
+
+## Choosing for your builds
+
+| Your project | Recommended API | Rationale |
+|--------------|-----------------|-----------|
+| **Content Fleet** research agents | **Perplexity Sonar Deep Research** – cheapest per report, citation‑ready HTML. |
+| **CompanyCam AI Photo Inspirations** (needs live docs) | **OpenAI Responses API** – already fits into your GPT‑4.5 stack, supports tool orchestration. |
+| **Nebraska charity graph** (peer‑reviewed evidence) | **Consensus API** – scientific‑literature retrieval baked in; summarize via GPT‑4.5. |
+| **Private knowledge base RAG** | **Nomic Atlas Retrieval + Analyst** – keep data on‑prem, still get agentic reasoning. |
+
+---
+
+### Things to watch ⚠️
+
+* **Rate limits** – Perplexity deep requests default to 60/min; Gemini budgets concurrent “thinking” tokens.  
+* **Attribution requirements** – Vendors expect you to surface citation links to end‑users.  
+* **Hallucinations** – Multi‑hop agents reduce but don’t eliminate fabrications; always expose sources or run fact‑checks.  
+* **Elicit & Iris.ai** – promising UIs, but their APIs are currently invite‑only or enterprise‑only (as of July 2025).
+
+---
+
+## Sources
+
+1. Perplexity API docs – [docs.perplexity.ai/guides/getting-started](https://docs.perplexity.ai/guides/getting-started)  
+2. Sonar Deep Research parameter ref – [docs.perplexity.ai/api-reference/chat-completions-post](https://docs.perplexity.ai/api-reference/chat-completions-post)  
+3. Google Vertex AI “Thinking budget” – [cloud.google.com/vertex-ai/generative-ai/docs/thinking](https://cloud.google.com/vertex-ai/generative-ai/docs/thinking)  
+4. Google Vertex AI search grounding overview – [cloud.google.com/vertex-ai/generative-ai/docs/grounding/overview](https://cloud.google.com/vertex-ai/generative-ai/docs/grounding/overview)  
+5. OpenAI Web Search Tool guide – [platform.openai.com/docs/guides/tools-web-search](https://platform.openai.com/docs/guides/tools-web-search)  
+6. OpenAI Responses API reference – [platform.openai.com/docs/api-reference/responses](https://platform.openai.com/docs/api-reference/responses)  
+7. OpenAI Responses API launch news – *The Verge*, 2025‑04‑08 – [theverge.com/news/627556/openai-ai-agents-responses-api-agents-sdk](https://www.theverge.com/news/627556/openai-ai-agents-responses-api-agents-sdk)  
+8. Consensus API overview – [consensus.app/home/api](https://consensus.app/home/api/)  
+9. Nomic Atlas Analyst docs – [docs.nomic.ai/atlas/data-maps/atlas-analyst](https://docs.nomic.ai/atlas/data-maps/atlas-analyst)  
+10. Nomic Atlas Retrieval product page – [atlas.nomic.ai](https://atlas.nomic.ai/)  
+
+---
+
+*Prepared July 1 2025 — Happy coding!*  

@@ -1,0 +1,16 @@
+{
+  "name": "nuforc-api",
+  "version": "1.0.0",
+  "description": "A professional RESTful API for querying UFO sighting reports, built with FastAPI and featuring data sourced from the National UFO Reporting Center (NUFORC).",
+  "main": "test_map_puppeteer.js",
+  "directories": {
+    "doc": "docs",
+    "test": "tests"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
