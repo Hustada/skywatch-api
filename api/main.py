@@ -5,8 +5,22 @@ from fastapi.openapi.docs import get_swagger_ui_html
 from fastapi.openapi.utils import get_openapi
 from fastapi.templating import Jinja2Templates
 from fastapi.responses import HTMLResponse
-from api.routers import health, sightings
+from fastapi.middleware.cors import CORSMiddleware
+from fastapi.middleware.trustedhost import TrustedHostMiddleware
+from fastapi.exceptions import RequestValidationError
+from starlette.middleware.base import BaseHTTPMiddleware
+from starlette.exceptions import HTTPException as StarletteHTTPException
+from api.routers import health, sightings, auth
 from api.database import create_tables
+from api.middleware import APIKeyMiddleware
+from api.config import settings
+from api.errors import (
+    APIException,
+    api_exception_handler,
+    http_exception_handler,
+    validation_exception_handler,
+    generic_exception_handler
+)
 
 
 @asynccontextmanager
@@ -21,13 +35,51 @@ async def lifespan(app: FastAPI):
 
 
 app = FastAPI(
-    title="SkyWatch API",
+    title=settings.API_TITLE,
     description="API for querying UFO sighting reports sourced from the National UFO Reporting Center (NUFORC) database",
-    version="1.0.0",
+    version=settings.API_VERSION,
     docs_url=None,  # Disable default docs
     redoc_url="/redoc",
     lifespan=lifespan,
 )
+
+# Security Headers Middleware
+class SecurityHeadersMiddleware(BaseHTTPMiddleware):
+    async def dispatch(self, request: Request, call_next):
+        response = await call_next(request)
+        response.headers["X-Content-Type-Options"] = "nosniff"
+        response.headers["X-Frame-Options"] = "DENY"
+        response.headers["X-XSS-Protection"] = "1; mode=block"
+        response.headers["Referrer-Policy"] = "strict-origin-when-cross-origin"
+        
+        # Add HSTS header for production
+        if settings.ENVIRONMENT == "production":
+            response.headers["Strict-Transport-Security"] = "max-age=31536000; includeSubDomains"
+        
+        return response
+
+# Add middleware in correct order (from outermost to innermost)
+# 1. Security headers (outermost)
+app.add_middleware(SecurityHeadersMiddleware)
+
+# 2. CORS
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=settings.CORS_ORIGINS,
+    allow_credentials=settings.CORS_ALLOW_CREDENTIALS,
+    allow_methods=settings.CORS_ALLOW_METHODS,
+    allow_headers=settings.CORS_ALLOW_HEADERS,
+)
+
+# 3. Trusted Host (prevent host header attacks)
+if settings.ENVIRONMENT == "production":
+    app.add_middleware(
+        TrustedHostMiddleware,
+        allowed_hosts=["api.skywatch.io", "*.skywatch.io"],  # Update with your actual domain
+    )
+
+# 4. API key middleware (innermost)
+app.add_middleware(APIKeyMiddleware)
 
 # Mount static files and templates
 app.mount("/static", StaticFiles(directory="static"), name="static")
@@ -49,6 +101,14 @@ async def swagger_ui_html():
     )
 
 
+# Register exception handlers
+app.add_exception_handler(APIException, api_exception_handler)
+app.add_exception_handler(StarletteHTTPException, http_exception_handler)
+app.add_exception_handler(RequestValidationError, validation_exception_handler)
+# Uncomment for production to catch all unhandled exceptions
+# app.add_exception_handler(Exception, generic_exception_handler)
+
 # Include routers
 app.include_router(health.router)
+app.include_router(auth.router)
 app.include_router(sightings.router)

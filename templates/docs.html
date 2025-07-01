@@ -51,6 +51,321 @@
             color: #6b7280;
         }
 
+        .sidebar-user-info {
+            margin-top: 16px;
+            padding: 12px;
+            background: #f8fafc;
+            border-radius: 8px;
+            border: 1px solid #e2e8f0;
+        }
+
+        .sidebar-user-name {
+            font-size: 14px;
+            font-weight: 600;
+            color: #1a1a1a;
+            margin-bottom: 2px;
+            display: block;
+        }
+
+        .sidebar-user-email {
+            font-size: 12px;
+            color: #6b7280;
+            margin-bottom: 8px;
+            display: block;
+        }
+
+        .sidebar-user-actions {
+            display: flex;
+            gap: 8px;
+        }
+
+        .sidebar-btn {
+            background: white;
+            border: 1px solid #d1d5db;
+            color: #374151;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 11px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            text-decoration: none;
+        }
+
+        .sidebar-btn:hover {
+            background: #f9fafb;
+            border-color: #9ca3af;
+        }
+
+        .sidebar-btn.btn-logout {
+            color: #dc2626;
+            border-color: #fecaca;
+        }
+
+        .sidebar-btn.btn-logout:hover {
+            background: #fef2f2;
+            border-color: #fca5a5;
+        }
+
+        .sidebar-auth {
+            margin-top: 16px;
+            padding: 12px;
+            background: #f8fafc;
+            border-radius: 8px;
+            border: 1px solid #e2e8f0;
+        }
+
+        .sidebar-auth-title {
+            font-size: 14px;
+            font-weight: 600;
+            color: #1a1a1a;
+            margin-bottom: 8px;
+        }
+
+        .sidebar-auth-desc {
+            font-size: 12px;
+            color: #6b7280;
+            margin-bottom: 12px;
+            line-height: 1.4;
+        }
+
+        .sidebar-auth-actions {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+
+        .sidebar-btn-primary {
+            background: linear-gradient(135deg, #cc5500, #ff6b35);
+            color: white;
+            border: none;
+            padding: 6px 12px;
+            border-radius: 4px;
+            font-size: 12px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            text-decoration: none;
+            text-align: center;
+        }
+
+        .sidebar-btn-primary:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(204, 85, 0, 0.3);
+        }
+
+        /* Error Section Styles */
+        .error-codes {
+            margin: 32px 0;
+        }
+
+        .error-code {
+            display: flex;
+            align-items: flex-start;
+            gap: 16px;
+            margin-bottom: 24px;
+            padding: 16px;
+            background: #f8fafc;
+            border-radius: 8px;
+            border: 1px solid #e2e8f0;
+        }
+
+        .error-status {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            min-width: 160px;
+        }
+
+        .status-code {
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-weight: 600;
+            font-size: 14px;
+            font-family: monospace;
+        }
+
+        .status-code.success {
+            background: #dcfce7;
+            color: #166534;
+        }
+
+        .status-code.client-error {
+            background: #fef3c7;
+            color: #92400e;
+        }
+
+        .status-code.server-error {
+            background: #fecaca;
+            color: #991b1b;
+        }
+
+        .status-text {
+            font-weight: 500;
+            color: #374151;
+        }
+
+        .error-description {
+            margin: 0;
+            color: #6b7280;
+            line-height: 1.5;
+        }
+
+        /* Schema Section Styles */
+        .schema {
+            margin: 32px 0;
+            padding: 24px;
+            background: #f8fafc;
+            border-radius: 8px;
+            border: 1px solid #e2e8f0;
+        }
+
+        .schema-title {
+            font-size: 20px;
+            font-weight: 600;
+            color: #1a1a1a;
+            margin-bottom: 8px;
+        }
+
+        .schema-description {
+            color: #6b7280;
+            margin-bottom: 20px;
+        }
+
+        .schema-properties {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .property {
+            padding: 16px;
+            background: white;
+            border-radius: 6px;
+            border: 1px solid #e2e8f0;
+        }
+
+        .property-name {
+            font-weight: 600;
+            color: #1a1a1a;
+            margin-bottom: 4px;
+            font-family: monospace;
+        }
+
+        .property-type {
+            background: #f3f4f6;
+            color: #6b7280;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-size: 12px;
+            font-weight: 500;
+        }
+
+        .property-description {
+            color: #6b7280;
+            font-size: 14px;
+            line-height: 1.5;
+        }
+
+        /* Rate Limits Section Styles */
+        .rate-limit-tiers {
+            margin: 32px 0;
+        }
+
+        .rate-limit-tier {
+            margin-bottom: 24px;
+            padding: 20px;
+            background: #f8fafc;
+            border-radius: 8px;
+            border: 1px solid #e2e8f0;
+        }
+
+        .tier-name {
+            font-size: 18px;
+            font-weight: 600;
+            color: #1a1a1a;
+            margin-bottom: 12px;
+        }
+
+        .tier-limits {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .limit {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .limit-label {
+            font-weight: 500;
+            color: #6b7280;
+        }
+
+        .limit-value {
+            font-weight: 600;
+            color: #1a1a1a;
+            font-family: monospace;
+        }
+
+        .header-definitions {
+            margin: 24px 0;
+        }
+
+        .header-def {
+            display: flex;
+            margin-bottom: 12px;
+            padding: 12px;
+            background: #f8fafc;
+            border-radius: 6px;
+        }
+
+        .header-name {
+            font-weight: 600;
+            color: #1a1a1a;
+            font-family: monospace;
+            min-width: 180px;
+        }
+
+        .header-description {
+            color: #6b7280;
+            line-height: 1.5;
+        }
+
+        .best-practices {
+            margin: 32px 0;
+            padding: 20px;
+            background: #f0f9ff;
+            border-radius: 8px;
+            border: 1px solid #0ea5e9;
+        }
+
+        .practices-title {
+            font-size: 16px;
+            font-weight: 600;
+            color: #0c4a6e;
+            margin-bottom: 12px;
+        }
+
+        .practices-list {
+            margin: 0;
+            padding-left: 20px;
+            color: #0c4a6e;
+        }
+
+        .practices-list li {
+            margin-bottom: 8px;
+            line-height: 1.5;
+        }
+
+        .subsection-title {
+            font-size: 20px;
+            font-weight: 600;
+            color: #1a1a1a;
+            margin: 32px 0 16px 0;
+        }
+
         .nav-section {
             margin-top: 32px;
         }
@@ -593,6 +908,495 @@
                 font-size: 36px;
             }
         }
+        /* Authentication & Pricing Styles */
+        .auth-status {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 12px;
+            padding: 24px;
+            margin-bottom: 32px;
+            color: white;
+        }
+
+        .auth-status-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 24px;
+        }
+
+        .auth-status-left {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+
+        .auth-status-text {
+            font-size: 18px;
+            font-weight: 600;
+        }
+
+        .auth-status-desc {
+            font-size: 14px;
+            opacity: 0.9;
+        }
+
+        .auth-status-right {
+            display: flex;
+            gap: 12px;
+        }
+
+        .user-dashboard {
+            background: #f8fafc;
+            border: 1px solid #e2e8f0;
+            border-radius: 12px;
+            padding: 24px;
+            margin-bottom: 32px;
+        }
+
+        .dashboard-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 24px;
+            padding-bottom: 16px;
+            border-bottom: 1px solid #e2e8f0;
+        }
+
+        .user-info {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+
+        .user-name {
+            font-size: 18px;
+            font-weight: 600;
+            color: #1a1a1a;
+        }
+
+        .user-email {
+            font-size: 14px;
+            color: #6b7280;
+        }
+
+        .dashboard-content {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 24px;
+        }
+
+        .dashboard-card {
+            background: white;
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            padding: 20px;
+        }
+
+        .dashboard-card h4 {
+            margin: 0 0 16px 0;
+            color: #1a1a1a;
+            font-size: 16px;
+            font-weight: 600;
+        }
+
+        .api-key-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px;
+            background: #f8fafc;
+            border-radius: 6px;
+            margin-bottom: 8px;
+        }
+
+        .api-key-info {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+
+        .api-key-name {
+            font-weight: 500;
+            color: #1a1a1a;
+        }
+
+        .api-key-details {
+            font-size: 12px;
+            color: #6b7280;
+        }
+
+        .usage-stat {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 8px 0;
+            border-bottom: 1px solid #f1f5f9;
+        }
+
+        .usage-stat:last-child {
+            border-bottom: none;
+        }
+
+        .usage-label {
+            font-size: 14px;
+            color: #6b7280;
+        }
+
+        .usage-value {
+            font-weight: 600;
+            color: #1a1a1a;
+        }
+
+        .pricing-section {
+            margin-top: 48px;
+        }
+
+        .pricing-title {
+            text-align: center;
+            font-size: 28px;
+            font-weight: 600;
+            color: #1a1a1a;
+            margin-bottom: 40px;
+        }
+
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 24px;
+            margin-bottom: 32px;
+        }
+
+        .pricing-card {
+            background: white;
+            border: 2px solid #e2e8f0;
+            border-radius: 12px;
+            padding: 32px 24px;
+            position: relative;
+            transition: all 0.3s ease;
+        }
+
+        .pricing-card:hover {
+            border-color: #cc5500;
+            transform: translateY(-4px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+        }
+
+        .pricing-popular {
+            border-color: #cc5500;
+            transform: scale(1.05);
+        }
+
+        .pricing-badge {
+            position: absolute;
+            top: -12px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: linear-gradient(135deg, #cc5500, #ff6b35);
+            color: white;
+            padding: 6px 20px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .pricing-header {
+            text-align: center;
+            margin-bottom: 24px;
+        }
+
+        .pricing-header h4 {
+            font-size: 24px;
+            font-weight: 600;
+            color: #1a1a1a;
+            margin-bottom: 8px;
+        }
+
+        .pricing-price {
+            font-size: 48px;
+            font-weight: 700;
+            color: #cc5500;
+            line-height: 1;
+        }
+
+        .pricing-price span {
+            font-size: 16px;
+            font-weight: 500;
+            color: #6b7280;
+        }
+
+        .pricing-features {
+            margin-bottom: 24px;
+        }
+
+        .pricing-feature {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 0;
+            font-size: 14px;
+            color: #374151;
+        }
+
+        .pricing-feature::before {
+            content: "✓";
+            color: #059669;
+            font-weight: 600;
+            font-size: 16px;
+        }
+
+        .pricing-note {
+            text-align: center;
+            font-size: 14px;
+            color: #6b7280;
+            font-style: italic;
+        }
+
+        .pricing-note a {
+            color: #cc5500;
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        .pricing-note a:hover {
+            text-decoration: underline;
+        }
+
+        .pricing-footer {
+            text-align: center;
+            padding: 24px;
+            background: #f8fafc;
+            border-radius: 8px;
+            color: #6b7280;
+            font-size: 14px;
+        }
+
+        .pricing-footer p {
+            margin: 0 0 8px 0;
+        }
+
+        .pricing-footer p:last-child {
+            margin-bottom: 0;
+        }
+
+        /* Button Styles */
+        .btn-primary {
+            background: linear-gradient(135deg, #cc5500, #ff6b35);
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 8px 25px rgba(204, 85, 0, 0.3);
+        }
+
+        .btn-secondary {
+            background: white;
+            color: #374151;
+            border: 1px solid #d1d5db;
+            padding: 12px 24px;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .btn-secondary:hover {
+            background: #f9fafb;
+            border-color: #9ca3af;
+        }
+
+        .btn-outline {
+            background: transparent;
+            color: #cc5500;
+            border: 1px solid #cc5500;
+            padding: 8px 16px;
+            border-radius: 6px;
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .btn-outline:hover {
+            background: #cc5500;
+            color: white;
+        }
+
+        .api-key-actions {
+            display: flex;
+            gap: 8px;
+            align-items: center;
+        }
+
+        .btn-copy {
+            background: #f0f9ff;
+            color: #0369a1;
+            border-color: #bae6fd;
+        }
+
+        .btn-copy:hover {
+            background: #0369a1;
+            color: white;
+            border-color: #0369a1;
+        }
+
+        .btn-show {
+            background: #f9fafb;
+            color: #374151;
+            border-color: #d1d5db;
+        }
+
+        .btn-show:hover {
+            background: #f3f4f6;
+            color: #1f2937;
+            border-color: #9ca3af;
+        }
+
+        .btn-delete {
+            background: #fef2f2;
+            color: #dc2626;
+            border-color: #fecaca;
+        }
+
+        .btn-delete:hover {
+            background: #dc2626;
+            color: white;
+            border-color: #dc2626;
+        }
+
+        .loading {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            color: #6b7280;
+            font-style: italic;
+        }
+
+        /* Modal Styles */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.5);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+        }
+
+        .modal {
+            background: white;
+            border-radius: 12px;
+            padding: 32px;
+            width: 100%;
+            max-width: 400px;
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.2);
+        }
+
+        .modal-header {
+            text-align: center;
+            margin-bottom: 24px;
+        }
+
+        .modal-title {
+            font-size: 24px;
+            font-weight: 600;
+            color: #1a1a1a;
+            margin-bottom: 8px;
+        }
+
+        .modal-subtitle {
+            font-size: 14px;
+            color: #6b7280;
+        }
+
+        .modal-form {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .modal-input {
+            padding: 12px 16px;
+            border: 1px solid #d1d5db;
+            border-radius: 8px;
+            font-size: 14px;
+            transition: border-color 0.2s ease;
+        }
+
+        .modal-input:focus {
+            outline: none;
+            border-color: #cc5500;
+            box-shadow: 0 0 0 3px rgba(204, 85, 0, 0.1);
+        }
+
+        .modal-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 24px;
+            font-size: 14px;
+        }
+
+        .modal-link {
+            color: #cc5500;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        .modal-link:hover {
+            text-decoration: underline;
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 16px;
+            right: 16px;
+            background: none;
+            border: none;
+            font-size: 24px;
+            color: #6b7280;
+            cursor: pointer;
+            padding: 4px;
+        }
+
+        .modal-close:hover {
+            color: #1a1a1a;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .auth-status-content {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 16px;
+            }
+
+            .dashboard-content {
+                grid-template-columns: 1fr;
+            }
+
+            .pricing-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .pricing-popular {
+                transform: none;
+            }
+        }
     </style>
 </head>
 <body>
@@ -602,13 +1406,33 @@
             <div class="sidebar-header">
                 <div class="sidebar-title">SkyWatch API</div>
                 <div class="sidebar-subtitle">Documentation</div>
+                
+                <!-- User Info (shown when authenticated) -->
+                <div class="sidebar-user-info" id="sidebarUserInfo" style="display: none;">
+                    <span class="sidebar-user-name" id="sidebarUserName">User Name</span>
+                    <span class="sidebar-user-email" id="sidebarUserEmail">user@example.com</span>
+                    <div class="sidebar-user-actions">
+                        <button class="sidebar-btn" onclick="showDashboard()">Dashboard</button>
+                        <button class="sidebar-btn btn-logout" onclick="logout()">Sign Out</button>
+                    </div>
+                </div>
+                
+                <!-- Auth Section (shown when not authenticated) -->
+                <div class="sidebar-auth" id="sidebarAuth" style="display: block;">
+                    <div class="sidebar-auth-title">Get Started</div>
+                    <div class="sidebar-auth-desc">Sign in to access your API keys and start making requests</div>
+                    <div class="sidebar-auth-actions">
+                        <button class="sidebar-btn-primary" onclick="showAuthModal('signup')">Create Account</button>
+                        <button class="sidebar-btn" onclick="showAuthModal('login')">Sign In</button>
+                    </div>
+                </div>
             </div>
             
             <div class="nav-section">
                 <div class="nav-section-title">Getting Started</div>
                 <a href="#overview" class="nav-item active">Overview</a>
+                <a href="#authentication" class="nav-item">Authentication & Pricing</a>
                 <a href="#query-builder" class="nav-item">Query Builder</a>
-                <a href="#authentication" class="nav-item">Authentication</a>
                 <a href="#errors" class="nav-item">Errors</a>
             </div>
             
@@ -647,6 +1471,186 @@
                     </div>
                 </div>
             </div>
+
+            <!-- Overview Section -->
+            <section id="overview" class="section">
+                <h2 class="section-title">Welcome to SkyWatch API</h2>
+                <p class="section-description">Access 80,000+ UFO sighting records with a modern, developer-friendly API.</p>
+                
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 24px; margin: 32px 0;">
+                    <div style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 8px; padding: 20px;">
+                        <h4 style="margin: 0 0 12px 0; color: #cc5500; font-size: 16px;">🗃️ Rich Dataset</h4>
+                        <p style="margin: 0; color: #6b7280; font-size: 14px;">Comprehensive UFO sighting reports with location data, descriptions, timestamps, and witness accounts spanning decades.</p>
+                    </div>
+                    <div style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 8px; padding: 20px;">
+                        <h4 style="margin: 0 0 12px 0; color: #cc5500; font-size: 16px;">🚀 Developer-First</h4>
+                        <p style="margin: 0; color: #6b7280; font-size: 14px;">RESTful API with intuitive endpoints, comprehensive documentation, interactive query builder, and code examples.</p>
+                    </div>
+                    <div style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 8px; padding: 20px;">
+                        <h4 style="margin: 0 0 12px 0; color: #cc5500; font-size: 16px;">⚡ Production-Ready</h4>
+                        <p style="margin: 0; color: #6b7280; font-size: 14px;">Rate limiting, usage analytics, secure API keys, and reliable infrastructure with 99.9% uptime.</p>
+                    </div>
+                </div>
+
+                <div style="background: linear-gradient(135deg, #1e3a8a 0%, #3730a3 100%); border-radius: 12px; padding: 24px; color: white; margin: 32px 0;">
+                    <h4 style="margin: 0 0 8px 0; font-size: 18px;">Quick Start Example</h4>
+                    <p style="margin: 0 0 16px 0; opacity: 0.9; font-size: 14px;">Get UFO sightings in California with a simple HTTP request:</p>
+                    <code style="background: rgba(0,0,0,0.3); padding: 12px; border-radius: 6px; display: block; font-family: monospace; font-size: 14px;">
+                        curl -H "X-API-Key: YOUR_API_KEY" "https://api.skywatch.dev/v1/sightings?state=CA&limit=10"
+                    </code>
+                </div>
+            </section>
+
+            <!-- Authentication & Pricing Section -->
+            <section id="authentication" class="section">
+                <h2 class="section-title">Authentication & Pricing</h2>
+                <p class="section-description">Secure API access with usage-based pricing. Get started in minutes.</p>
+                
+                <!-- Auth Status Bar -->
+                <div class="auth-status" id="authStatus">
+                    <div class="auth-status-content">
+                        <div class="auth-status-left">
+                            <span class="auth-status-text">🔑 API Key Required</span>
+                            <span class="auth-status-desc">Sign up to start making requests</span>
+                        </div>
+                        <div class="auth-status-right">
+                            <button class="btn-primary" onclick="showAuthModal('signup')">Create Account</button>
+                            <button class="btn-secondary" onclick="showAuthModal('login')">Sign In</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Authenticated User Dashboard -->
+                <div class="user-dashboard" id="userDashboard" style="display: none;">
+                    <div class="dashboard-content">
+                        <div class="dashboard-card">
+                            <h4>Your API Keys</h4>
+                            <div class="api-keys-list" id="apiKeysList">
+                                <div class="loading">Loading...</div>
+                            </div>
+                            
+                            <!-- API Key Creation Form -->
+                            <div class="api-key-form" id="apiKeyForm" style="display: none;">
+                                <div style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 8px; padding: 16px; margin: 16px 0;">
+                                    <h5 style="margin: 0 0 12px 0; font-size: 14px; color: #1a1a1a;">Create New API Key</h5>
+                                    <div style="display: flex; gap: 12px; align-items: end;">
+                                        <div style="flex: 1;">
+                                            <label style="display: block; font-size: 12px; color: #6b7280; margin-bottom: 4px;">Key Name</label>
+                                            <input type="text" id="newKeyName" placeholder="e.g., My Website, Mobile App" 
+                                                   style="width: 100%; padding: 8px 12px; border: 1px solid #d1d5db; border-radius: 6px; font-size: 14px;">
+                                        </div>
+                                        <div>
+                                            <label style="display: block; font-size: 12px; color: #6b7280; margin-bottom: 4px;">Tier</label>
+                                            <select id="newKeyTier" style="padding: 8px 12px; border: 1px solid #d1d5db; border-radius: 6px; font-size: 14px;">
+                                                <option value="free">Free (1,000/month)</option>
+                                                <option value="basic">Basic ($9 - 10,000/month)</option>
+                                                <option value="pro">Pro ($49 - 100,000/month)</option>
+                                            </select>
+                                        </div>
+                                        <button class="btn-primary" onclick="submitCreateApiKey()" style="white-space: nowrap;">Create Key</button>
+                                        <button class="btn-secondary" onclick="cancelCreateApiKey()" style="white-space: nowrap;">Cancel</button>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- New API Key Display -->
+                            <div class="new-api-key-display" id="newApiKeyDisplay" style="display: none;">
+                                <div style="background: #ecfdf5; border: 1px solid #a7f3d0; border-radius: 8px; padding: 16px; margin: 16px 0;">
+                                    <h5 style="margin: 0 0 8px 0; font-size: 14px; color: #065f46;">✅ API Key Created Successfully</h5>
+                                    <p style="margin: 0 0 12px 0; font-size: 12px; color: #047857;">Please copy your API key now. You won't be able to see it again.</p>
+                                    <div style="background: #1a1a1a; border-radius: 6px; padding: 12px; font-family: monospace; color: #f9fafb; font-size: 13px; word-break: break-all; position: relative;">
+                                        <span id="newApiKeyValue"></span>
+                                        <button onclick="copyNewApiKey()" style="position: absolute; top: 8px; right: 8px; background: rgba(255,255,255,0.2); border: 1px solid rgba(255,255,255,0.3); color: white; padding: 4px 8px; border-radius: 4px; font-size: 11px; cursor: pointer;">Copy</button>
+                                    </div>
+                                    <button class="btn-outline" onclick="hideNewApiKey()" style="margin-top: 12px;">I've saved my key</button>
+                                </div>
+                            </div>
+                            
+                            <button class="btn-outline" id="showCreateKeyBtn" onclick="showCreateApiKeyForm()">+ Create New Key</button>
+                        </div>
+                        
+                        <div class="dashboard-card">
+                            <h4>Usage This Month</h4>
+                            <div class="usage-stats" id="usageStats">
+                                <div class="loading">Loading...</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Pricing Table -->
+                <div class="pricing-section">
+                    <h3 class="pricing-title">Simple, Usage-Based Pricing</h3>
+                    <div class="pricing-grid">
+                        <div class="pricing-card">
+                            <div class="pricing-header">
+                                <h4>Free</h4>
+                                <div class="pricing-price">$0<span>/month</span></div>
+                            </div>
+                            <div class="pricing-features">
+                                <div class="pricing-feature">1,000 requests/month</div>
+                                <div class="pricing-feature">60 requests/hour</div>
+                                <div class="pricing-feature">Community support</div>
+                                <div class="pricing-feature">API documentation</div>
+                            </div>
+                            <div class="pricing-note">Perfect for testing and small projects</div>
+                        </div>
+                        
+                        <div class="pricing-card pricing-popular">
+                            <div class="pricing-badge">Most Popular</div>
+                            <div class="pricing-header">
+                                <h4>Developer</h4>
+                                <div class="pricing-price">$9<span>/month</span></div>
+                            </div>
+                            <div class="pricing-features">
+                                <div class="pricing-feature">10,000 requests/month</div>
+                                <div class="pricing-feature">300 requests/hour</div>
+                                <div class="pricing-feature">Email support</div>
+                                <div class="pricing-feature">Usage analytics</div>
+                                <div class="pricing-feature">Multiple API keys</div>
+                            </div>
+                            <div class="pricing-note">Great for production applications</div>
+                        </div>
+                        
+                        <div class="pricing-card">
+                            <div class="pricing-header">
+                                <h4>Pro</h4>
+                                <div class="pricing-price">$49<span>/month</span></div>
+                            </div>
+                            <div class="pricing-features">
+                                <div class="pricing-feature">100,000 requests/month</div>
+                                <div class="pricing-feature">1,000 requests/hour</div>
+                                <div class="pricing-feature">Priority support</div>
+                                <div class="pricing-feature">Advanced analytics</div>
+                                <div class="pricing-feature">Custom rate limits</div>
+                            </div>
+                            <div class="pricing-note">For high-volume applications</div>
+                        </div>
+                        
+                        <div class="pricing-card">
+                            <div class="pricing-header">
+                                <h4>Enterprise</h4>
+                                <div class="pricing-price">Custom</div>
+                            </div>
+                            <div class="pricing-features">
+                                <div class="pricing-feature">Unlimited requests</div>
+                                <div class="pricing-feature">Custom rate limits</div>
+                                <div class="pricing-feature">Dedicated support</div>
+                                <div class="pricing-feature">SLA guarantee</div>
+                                <div class="pricing-feature">Custom integrations</div>
+                            </div>
+                            <div class="pricing-note">
+                                <a href="mailto:sales@skywatch.dev">Contact Sales</a>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="pricing-footer">
+                        <p>All plans include access to 80,000+ UFO sighting records with real-time updates.</p>
+                        <p>Overage rates: $0.50 per 1,000 additional requests above your plan limit.</p>
+                    </div>
+                </div>
+            </section>
 
             <!-- Query Builder Section -->
             <section id="query-builder" class="section">
@@ -786,6 +1790,100 @@
                         </div>
                     </div>
                 </div>
+            </section>
+
+            <!-- Errors Section -->
+            <section id="errors" class="section">
+                <h2 class="section-title">Error Handling</h2>
+                <p class="section-description">The SkyWatch API uses conventional HTTP response codes to indicate success or failure.</p>
+                
+                <div class="error-codes">
+                    <h3 class="subsection-title">HTTP Status Codes</h3>
+                    
+                    <div class="error-code">
+                        <div class="error-status">
+                            <span class="status-code success">200</span>
+                            <span class="status-text">OK</span>
+                        </div>
+                        <p class="error-description">Everything worked as expected.</p>
+                    </div>
+                    
+                    <div class="error-code">
+                        <div class="error-status">
+                            <span class="status-code client-error">400</span>
+                            <span class="status-text">Bad Request</span>
+                        </div>
+                        <p class="error-description">The request was unacceptable, often due to missing a required parameter.</p>
+                    </div>
+                    
+                    <div class="error-code">
+                        <div class="error-status">
+                            <span class="status-code client-error">401</span>
+                            <span class="status-text">Unauthorized</span>
+                        </div>
+                        <p class="error-description">No valid API key provided.</p>
+                    </div>
+                    
+                    <div class="error-code">
+                        <div class="error-status">
+                            <span class="status-code client-error">403</span>
+                            <span class="status-text">Forbidden</span>
+                        </div>
+                        <p class="error-description">The API key doesn't have permissions to perform the request.</p>
+                    </div>
+                    
+                    <div class="error-code">
+                        <div class="error-status">
+                            <span class="status-code client-error">404</span>
+                            <span class="status-text">Not Found</span>
+                        </div>
+                        <p class="error-description">The requested resource doesn't exist.</p>
+                    </div>
+                    
+                    <div class="error-code">
+                        <div class="error-status">
+                            <span class="status-code client-error">429</span>
+                            <span class="status-text">Too Many Requests</span>
+                        </div>
+                        <p class="error-description">Too many requests hit the API too quickly. Rate limiting is active.</p>
+                    </div>
+                    
+                    <div class="error-code">
+                        <div class="error-status">
+                            <span class="status-code server-error">500</span>
+                            <span class="status-text">Internal Server Error</span>
+                        </div>
+                        <p class="error-description">Something went wrong on our end.</p>
+                    </div>
+                    
+                    <div class="error-code">
+                        <div class="error-status">
+                            <span class="status-code server-error">503</span>
+                            <span class="status-text">Service Unavailable</span>
+                        </div>
+                        <p class="error-description">The server is temporarily unable to handle the request.</p>
+                    </div>
+                </div>
+                
+                <h3 class="subsection-title">Error Response Format</h3>
+                <p>All errors return JSON with the following structure:</p>
+                <div class="code-block">{
+  "error": "error_code",
+  "message": "Human-readable error description",
+  "details": {
+    "parameter": "Additional error context"
+  }
+}</div>
+                
+                <h3 class="subsection-title">Example Error Response</h3>
+                <div class="code-block">{
+  "error": "Invalid API key",
+  "message": "The provided API key is invalid or has been revoked.",
+  "details": {
+    "code": "invalid_api_key",
+    "timestamp": "2023-12-15T10:30:00Z"
+  }
+}</div>
             </section>
 
             <!-- Health Check Section -->
@@ -958,6 +2056,251 @@
                     </div>
                 </div>
             </section>
+
+            <!-- Schemas Section -->
+            <section id="schemas" class="section">
+                <h2 class="section-title">Data Schemas</h2>
+                <p class="section-description">Detailed schemas for all API objects and responses.</p>
+                
+                <div class="schema">
+                    <h3 class="schema-title">Sighting Object</h3>
+                    <p class="schema-description">Represents a UFO sighting report from the NUFORC database.</p>
+                    
+                    <div class="schema-properties">
+                        <div class="property">
+                            <div class="property-name">id <span class="property-type">integer</span></div>
+                            <div class="property-description">Unique identifier for the sighting</div>
+                        </div>
+                        
+                        <div class="property">
+                            <div class="property-name">date_time <span class="property-type">string</span></div>
+                            <div class="property-description">ISO 8601 timestamp of when the sighting occurred</div>
+                        </div>
+                        
+                        <div class="property">
+                            <div class="property-name">city <span class="property-type">string</span></div>
+                            <div class="property-description">City where the sighting was reported</div>
+                        </div>
+                        
+                        <div class="property">
+                            <div class="property-name">state <span class="property-type">string</span></div>
+                            <div class="property-description">US state abbreviation (2 letters)</div>
+                        </div>
+                        
+                        <div class="property">
+                            <div class="property-name">shape <span class="property-type">string</span></div>
+                            <div class="property-description">Reported shape of the UFO (e.g., "disk", "triangle", "light")</div>
+                        </div>
+                        
+                        <div class="property">
+                            <div class="property-name">duration <span class="property-type">string</span></div>
+                            <div class="property-description">How long the sighting lasted</div>
+                        </div>
+                        
+                        <div class="property">
+                            <div class="property-name">summary <span class="property-type">string</span></div>
+                            <div class="property-description">Brief summary of the sighting</div>
+                        </div>
+                        
+                        <div class="property">
+                            <div class="property-name">text <span class="property-type">string</span></div>
+                            <div class="property-description">Full detailed report of the sighting</div>
+                        </div>
+                        
+                        <div class="property">
+                            <div class="property-name">posted <span class="property-type">string</span></div>
+                            <div class="property-description">ISO 8601 timestamp of when the report was posted</div>
+                        </div>
+                        
+                        <div class="property">
+                            <div class="property-name">latitude <span class="property-type">number</span></div>
+                            <div class="property-description">Latitude coordinate (if available)</div>
+                        </div>
+                        
+                        <div class="property">
+                            <div class="property-name">longitude <span class="property-type">number</span></div>
+                            <div class="property-description">Longitude coordinate (if available)</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="schema">
+                    <h3 class="schema-title">Paginated Response</h3>
+                    <p class="schema-description">Standard pagination wrapper for list endpoints.</p>
+                    
+                    <div class="schema-properties">
+                        <div class="property">
+                            <div class="property-name">sightings <span class="property-type">array[Sighting]</span></div>
+                            <div class="property-description">Array of sighting objects</div>
+                        </div>
+                        
+                        <div class="property">
+                            <div class="property-name">total <span class="property-type">integer</span></div>
+                            <div class="property-description">Total number of sightings matching the query</div>
+                        </div>
+                        
+                        <div class="property">
+                            <div class="property-name">page <span class="property-type">integer</span></div>
+                            <div class="property-description">Current page number (1-indexed)</div>
+                        </div>
+                        
+                        <div class="property">
+                            <div class="property-name">per_page <span class="property-type">integer</span></div>
+                            <div class="property-description">Number of items per page</div>
+                        </div>
+                        
+                        <div class="property">
+                            <div class="property-name">pages <span class="property-type">integer</span></div>
+                            <div class="property-description">Total number of pages</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="schema">
+                    <h3 class="schema-title">Health Status</h3>
+                    <p class="schema-description">API health check response.</p>
+                    
+                    <div class="schema-properties">
+                        <div class="property">
+                            <div class="property-name">status <span class="property-type">string</span></div>
+                            <div class="property-description">Overall API status ("healthy" or "degraded")</div>
+                        </div>
+                        
+                        <div class="property">
+                            <div class="property-name">version <span class="property-type">string</span></div>
+                            <div class="property-description">API version number</div>
+                        </div>
+                        
+                        <div class="property">
+                            <div class="property-name">timestamp <span class="property-type">string</span></div>
+                            <div class="property-description">ISO 8601 timestamp of the health check</div>
+                        </div>
+                        
+                        <div class="property">
+                            <div class="property-name">database <span class="property-type">object</span></div>
+                            <div class="property-description">Database connectivity status and metrics</div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Rate Limits Section -->
+            <section id="rate-limits" class="section">
+                <h2 class="section-title">Rate Limits</h2>
+                <p class="section-description">Information about API usage limits and best practices.</p>
+                
+                <div class="rate-limit-tiers">
+                    <h3 class="subsection-title">Rate Limits by Tier</h3>
+                    
+                    <div class="rate-limit-tier">
+                        <h4 class="tier-name">Free Tier</h4>
+                        <div class="tier-limits">
+                            <div class="limit">
+                                <span class="limit-label">Rate Limit:</span>
+                                <span class="limit-value">60 requests per hour</span>
+                            </div>
+                            <div class="limit">
+                                <span class="limit-label">Monthly Quota:</span>
+                                <span class="limit-value">1,000 requests</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="rate-limit-tier">
+                        <h4 class="tier-name">Developer Tier ($9/month)</h4>
+                        <div class="tier-limits">
+                            <div class="limit">
+                                <span class="limit-label">Rate Limit:</span>
+                                <span class="limit-value">300 requests per hour</span>
+                            </div>
+                            <div class="limit">
+                                <span class="limit-label">Monthly Quota:</span>
+                                <span class="limit-value">10,000 requests</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="rate-limit-tier">
+                        <h4 class="tier-name">Pro Tier ($49/month)</h4>
+                        <div class="tier-limits">
+                            <div class="limit">
+                                <span class="limit-label">Rate Limit:</span>
+                                <span class="limit-value">1,000 requests per hour</span>
+                            </div>
+                            <div class="limit">
+                                <span class="limit-label">Monthly Quota:</span>
+                                <span class="limit-value">100,000 requests</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="rate-limit-tier">
+                        <h4 class="tier-name">Enterprise Tier</h4>
+                        <div class="tier-limits">
+                            <div class="limit">
+                                <span class="limit-label">Rate Limit:</span>
+                                <span class="limit-value">5,000 requests per hour</span>
+                            </div>
+                            <div class="limit">
+                                <span class="limit-label">Monthly Quota:</span>
+                                <span class="limit-value">Custom (unlimited available)</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <h3 class="subsection-title">Rate Limit Headers</h3>
+                <p>Every API response includes rate limit information in the headers:</p>
+                
+                <div class="code-block">HTTP/1.1 200 OK
+X-RateLimit-Limit: 300
+X-RateLimit-Remaining: 299
+X-RateLimit-Reset: 1640995200
+X-RateLimit-Used: 1</div>
+                
+                <div class="header-definitions">
+                    <div class="header-def">
+                        <div class="header-name">X-RateLimit-Limit</div>
+                        <div class="header-description">Maximum requests allowed per hour for your tier</div>
+                    </div>
+                    
+                    <div class="header-def">
+                        <div class="header-name">X-RateLimit-Remaining</div>
+                        <div class="header-description">Number of requests remaining in the current hour</div>
+                    </div>
+                    
+                    <div class="header-def">
+                        <div class="header-name">X-RateLimit-Reset</div>
+                        <div class="header-description">Unix timestamp when the rate limit resets</div>
+                    </div>
+                    
+                    <div class="header-def">
+                        <div class="header-name">X-RateLimit-Used</div>
+                        <div class="header-description">Number of requests used in the current hour</div>
+                    </div>
+                </div>
+                
+                <h3 class="subsection-title">Handling Rate Limits</h3>
+                <p>When you exceed your rate limit, the API returns a <code>429 Too Many Requests</code> response:</p>
+                
+                <div class="code-block">{
+  "error": "Rate limit exceeded",
+  "message": "Rate limit of 300 requests per hour exceeded.",
+  "rate_limit": 300,
+  "retry_after": 3600
+}</div>
+                
+                <div class="best-practices">
+                    <h4 class="practices-title">Best Practices</h4>
+                    <ul class="practices-list">
+                        <li>Monitor the rate limit headers in your responses</li>
+                        <li>Implement exponential backoff when approaching limits</li>
+                        <li>Cache responses when possible to reduce API calls</li>
+                        <li>Use pagination efficiently to avoid large responses</li>
+                        <li>Consider upgrading your tier if you regularly hit limits</li>
+                    </ul>
+                </div>
+            </section>
         </main>
     </div>
 
@@ -974,6 +2317,13 @@
         async function tryRequest(endpoint, method = 'GET') {
             try {
                 const response = await fetch(endpoint);
+                
+                // Check if the response is ok
+                if (!response.ok) {
+                    const errorData = await response.json();
+                    throw new Error(errorData.detail || `HTTP error! status: ${response.status}`);
+                }
+                
                 const data = await response.json();
                 document.getElementById('health-response').innerHTML = 
                     `<div class="code-block">${JSON.stringify(data, null, 2)}</div>`;
@@ -997,6 +2347,13 @@
             
             try {
                 const response = await fetch(url);
+                
+                // Check if the response is ok
+                if (!response.ok) {
+                    const errorData = await response.json();
+                    throw new Error(errorData.detail || `HTTP error! status: ${response.status}`);
+                }
+                
                 const data = await response.json();
                 document.getElementById('sightings-response').innerHTML = 
                     `<div class="code-block">${JSON.stringify(data, null, 2)}</div>`;
@@ -1016,6 +2373,13 @@
             
             try {
                 const response = await fetch(`/v1/sightings/${id}`);
+                
+                // Check if the response is ok
+                if (!response.ok) {
+                    const errorData = await response.json();
+                    throw new Error(errorData.detail || `HTTP error! status: ${response.status}`);
+                }
+                
                 const data = await response.json();
                 document.getElementById('single-sighting-response').innerHTML = 
                     `<div class="code-block">${JSON.stringify(data, null, 2)}</div>`;
@@ -1071,12 +2435,18 @@
                     
                 case 'curl':
                     code = `curl -X GET "${fullUrl}" \\
-     -H "Accept: application/json"`;
+     -H "Accept: application/json" \\
+     -H "X-API-Key: sk_live_your_api_key_here"`;
                     break;
                     
                 case 'javascript':
                     code = `// Using Fetch API
-fetch('${fullUrl}')
+fetch('${fullUrl}', {
+  headers: {
+    'Accept': 'application/json',
+    'X-API-Key': 'sk_live_your_api_key_here'
+  }
+})
   .then(response => response.json())
   .then(data => {
     console.log(\`Found \${data.total} UFO sightings\`);
@@ -1087,7 +2457,11 @@ fetch('${fullUrl}')
   .catch(error => console.error('Error:', error));
 
 // Using Axios
-axios.get('${fullUrl}')
+axios.get('${fullUrl}', {
+  headers: {
+    'X-API-Key': 'sk_live_your_api_key_here'
+  }
+})
   .then(response => {
     console.log(response.data);
   })
@@ -1097,8 +2471,14 @@ axios.get('${fullUrl}')
                 case 'python':
                     code = `import requests
 
+# Set up headers with API key
+headers = {
+    'Accept': 'application/json',
+    'X-API-Key': 'sk_live_your_api_key_here'
+}
+
 # Make the API request
-response = requests.get('${fullUrl}')
+response = requests.get('${fullUrl}', headers=headers)
 data = response.json()
 
 # Process the results
@@ -1117,7 +2497,10 @@ print(df.head())`;
 // Using cURL
 $ch = curl_init('${fullUrl}');
 curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-curl_setopt($ch, CURLOPT_HTTPHEADER, ['Accept: application/json']);
+curl_setopt($ch, CURLOPT_HTTPHEADER, [
+    'Accept: application/json',
+    'X-API-Key: sk_live_your_api_key_here'
+]);
 
 $response = curl_exec($ch);
 $data = json_decode($response, true);
@@ -1129,8 +2512,16 @@ foreach ($data['sightings'] as $sighting) {
     echo $sighting['city'] . ", " . $sighting['state'] . ": " . $sighting['summary'] . "\\n";
 }
 
-// Using file_get_contents (simpler method)
-$json = file_get_contents('${fullUrl}');
+// Using file_get_contents with stream context
+$opts = [
+    "http" => [
+        "method" => "GET",
+        "header" => "Accept: application/json\\r\\n" .
+                    "X-API-Key: sk_live_your_api_key_here\\r\\n"
+    ]
+];
+$context = stream_context_create($opts);
+$json = file_get_contents('${fullUrl}', false, $context);
 $data = json_decode($json, true);
 ?>`;
                     break;
@@ -1158,22 +2549,88 @@ $data = json_decode($json, true);
             }
             
             document.getElementById('previewSection').style.display = 'block';
+            
+            // Check if user has an API key
+            if (!authToken || !currentUser) {
+                document.getElementById('previewContainer').innerHTML = `
+                    <div style="background: #fef3c7; border: 1px solid #fcd34d; border-radius: 8px; padding: 16px;">
+                        <h4 style="margin: 0 0 8px 0; color: #92400e;">Authentication Required</h4>
+                        <p style="margin: 0 0 12px 0; color: #92400e;">To try the API live, you need to be signed in with an API key.</p>
+                        <button class="btn" onclick="showSignIn()" style="background: #f59e0b; color: white;">Sign In</button>
+                        <button class="btn-outline" onclick="showSignUp()" style="margin-left: 8px;">Sign Up</button>
+                    </div>
+                `;
+                return;
+            }
+            
+            // Get the first active API key (if available)
             document.getElementById('previewContainer').innerHTML = '<div class="preview-loading">Loading...</div>';
             
             try {
-                const response = await fetch(generatedUrl);
-                const data = await response.json();
+                // First, get user's API keys
+                const keysResponse = await fetch('/v1/auth/keys', {
+                    headers: {
+                        'Authorization': `Bearer ${authToken}`
+                    }
+                });
                 
+                if (!keysResponse.ok) {
+                    throw new Error('Failed to fetch API keys');
+                }
+                
+                const apiKeys = await keysResponse.json();
+                
+                if (apiKeys.length === 0) {
+                    document.getElementById('previewContainer').innerHTML = `
+                        <div style="background: #fef3c7; border: 1px solid #fcd34d; border-radius: 8px; padding: 16px;">
+                            <h4 style="margin: 0 0 8px 0; color: #92400e;">No API Key Found</h4>
+                            <p style="margin: 0 0 12px 0; color: #92400e;">You need to create an API key to try the API live.</p>
+                            <button class="btn" onclick="showDashboard(); showCreateApiKeyForm();" style="background: #f59e0b; color: white;">Create API Key</button>
+                        </div>
+                    `;
+                    return;
+                }
+                
+                // Use the first API key for the demo
+                // Note: In production, we would need to retrieve the actual API key value
+                // For now, show a message about using their API key
                 document.getElementById('previewContainer').innerHTML = `
-                    <div style="margin-bottom: 16px;">
-                        <strong>Total Results:</strong> ${data.total}<br>
-                        <strong>Page:</strong> ${data.page} of ${data.pages}<br>
-                        <strong>Showing:</strong> ${data.sightings.length} sightings
+                    <div style="background: #dbeafe; border: 1px solid #60a5fa; border-radius: 8px; padding: 16px; margin-bottom: 16px;">
+                        <h4 style="margin: 0 0 8px 0; color: #1e40af;">API Key Required</h4>
+                        <p style="margin: 0 0 12px 0; color: #1e40af;">
+                            To make live API requests, include your API key in the request headers:
+                        </p>
+                        <div class="code-block" style="background: #1a1a1a; color: #f9fafb; margin: 12px 0;">
+                            <pre style="margin: 0; padding: 12px;">X-API-Key: sk_live_your_api_key_here</pre>
+                        </div>
+                        <p style="margin: 0; color: #1e40af; font-size: 14px;">
+                            Copy the code examples above and add your API key to make real requests.
+                        </p>
                     </div>
-                    <div class="code-block" style="background: #1a1a1a; color: #f9fafb;">
-                        ${JSON.stringify(data, null, 2)}
+                    
+                    <div style="background: #f3f4f6; border: 1px solid #e5e7eb; border-radius: 8px; padding: 16px;">
+                        <h5 style="margin: 0 0 8px 0;">Example Response:</h5>
+                        <div class="code-block" style="background: #1a1a1a; color: #f9fafb; margin-top: 8px;">
+                            <pre style="margin: 0; padding: 12px;">{
+  "sightings": [
+    {
+      "id": 1,
+      "datetime": "2024-01-15T20:30:00",
+      "city": "Phoenix",
+      "state": "AZ",
+      "shape": "light",
+      "duration": "5 minutes",
+      "summary": "Bright light moving erratically in the night sky"
+    }
+  ],
+  "total": 150,
+  "page": 1,
+  "pages": 6
+}</pre>
+                        </div>
                     </div>
                 `;
+                
             } catch (error) {
                 document.getElementById('previewContainer').innerHTML = 
                     `<div style="color: #dc2626;">Error: ${error.message}</div>`;
@@ -1194,6 +2651,465 @@ $data = json_decode($json, true);
                 }
             });
         });
+
+        // Scroll-based navigation highlighting
+        function updateActiveNavigation() {
+            const sections = document.querySelectorAll('section[id]');
+            const navItems = document.querySelectorAll('.nav-item[href^="#"]');
+            
+            let currentSection = '';
+            const scrollPosition = window.scrollY + 100; // Offset for better UX
+            
+            // Find the current section
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.offsetHeight;
+                
+                if (scrollPosition >= sectionTop && scrollPosition < sectionTop + sectionHeight) {
+                    currentSection = section.getAttribute('id');
+                }
+            });
+            
+            // Update active navigation item
+            navItems.forEach(item => {
+                item.classList.remove('active');
+                const href = item.getAttribute('href');
+                if (href === `#${currentSection}`) {
+                    item.classList.add('active');
+                }
+            });
+        }
+
+        // Throttled scroll event listener for performance
+        let scrollTimeout;
+        window.addEventListener('scroll', () => {
+            if (scrollTimeout) {
+                clearTimeout(scrollTimeout);
+            }
+            scrollTimeout = setTimeout(updateActiveNavigation, 50);
+        });
+
+        // Initialize active navigation on page load
+        document.addEventListener('DOMContentLoaded', updateActiveNavigation);
+
+        // Authentication Functions
+        let authToken = localStorage.getItem('skywatch_token');
+        let currentUser = null;
+
+        // Check authentication status on page load
+        document.addEventListener('DOMContentLoaded', () => {
+            if (authToken) {
+                checkAuthStatus();
+            }
+        });
+
+        async function checkAuthStatus() {
+            try {
+                const response = await fetch('/v1/auth/me', {
+                    headers: {
+                        'Authorization': `Bearer ${authToken}`
+                    }
+                });
+                
+                if (response.ok) {
+                    currentUser = await response.json();
+                    showUserDashboard();
+                } else {
+                    logout();
+                }
+            } catch (error) {
+                console.error('Auth check failed:', error);
+                logout();
+            }
+        }
+
+        function showAuthModal(type) {
+            const modalHtml = type === 'signup' ? `
+                <div class="modal-overlay" onclick="closeModal(event)">
+                    <div class="modal" onclick="event.stopPropagation()">
+                        <button class="modal-close" onclick="closeModal()">×</button>
+                        <div class="modal-header">
+                            <h3 class="modal-title">Create Account</h3>
+                            <p class="modal-subtitle">Get started with SkyWatch API</p>
+                        </div>
+                        <form class="modal-form" onsubmit="handleSignup(event)">
+                            <input type="text" class="modal-input" placeholder="Full Name" name="name" required>
+                            <input type="email" class="modal-input" placeholder="Email" name="email" required>
+                            <input type="password" class="modal-input" placeholder="Password" name="password" required minlength="8">
+                            <button type="submit" class="btn-primary">Create Account</button>
+                        </form>
+                        <div class="modal-footer">
+                            <span>Already have an account?</span>
+                            <span class="modal-link" onclick="showAuthModal('login')">Sign In</span>
+                        </div>
+                    </div>
+                </div>
+            ` : `
+                <div class="modal-overlay" onclick="closeModal(event)">
+                    <div class="modal" onclick="event.stopPropagation()">
+                        <button class="modal-close" onclick="closeModal()">×</button>
+                        <div class="modal-header">
+                            <h3 class="modal-title">Sign In</h3>
+                            <p class="modal-subtitle">Welcome back to SkyWatch API</p>
+                        </div>
+                        <form class="modal-form" onsubmit="handleLogin(event)">
+                            <input type="email" class="modal-input" placeholder="Email" name="email" required>
+                            <input type="password" class="modal-input" placeholder="Password" name="password" required>
+                            <button type="submit" class="btn-primary">Sign In</button>
+                        </form>
+                        <div class="modal-footer">
+                            <span>Don't have an account?</span>
+                            <span class="modal-link" onclick="showAuthModal('signup')">Create Account</span>
+                        </div>
+                    </div>
+                </div>
+            `;
+            
+            document.body.insertAdjacentHTML('beforeend', modalHtml);
+        }
+
+        function closeModal(event) {
+            if (!event || event.target.classList.contains('modal-overlay') || event.target.classList.contains('modal-close')) {
+                const modal = document.querySelector('.modal-overlay');
+                if (modal) {
+                    modal.remove();
+                }
+            }
+        }
+
+        async function handleSignup(event) {
+            event.preventDefault();
+            const formData = new FormData(event.target);
+            
+            try {
+                const response = await fetch('/v1/auth/register', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        name: formData.get('name'),
+                        email: formData.get('email'),
+                        password: formData.get('password')
+                    })
+                });
+                
+                if (response.ok) {
+                    closeModal();
+                    showAuthModal('login');
+                    // Could show success message here
+                } else {
+                    const error = await response.json();
+                    alert(error.detail || 'Registration failed');
+                }
+            } catch (error) {
+                alert('Registration failed: ' + error.message);
+            }
+        }
+
+        async function handleLogin(event) {
+            event.preventDefault();
+            const formData = new FormData(event.target);
+            
+            try {
+                const response = await fetch('/v1/auth/login', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        email: formData.get('email'),
+                        password: formData.get('password')
+                    })
+                });
+                
+                if (response.ok) {
+                    const data = await response.json();
+                    authToken = data.access_token;
+                    localStorage.setItem('skywatch_token', authToken);
+                    closeModal();
+                    await checkAuthStatus();
+                } else {
+                    const error = await response.json();
+                    alert(error.detail || 'Login failed');
+                }
+            } catch (error) {
+                alert('Login failed: ' + error.message);
+            }
+        }
+
+        function logout() {
+            authToken = null;
+            currentUser = null;
+            localStorage.removeItem('skywatch_token');
+            
+            // Update sidebar - hide user info, show auth section
+            document.getElementById('sidebarUserInfo').style.display = 'none';
+            document.getElementById('sidebarAuth').style.display = 'block';
+            
+            showAuthStatus();
+        }
+
+        function showUserDashboard() {
+            document.getElementById('authStatus').style.display = 'none';
+            document.getElementById('userDashboard').style.display = 'block';
+            
+            // Update sidebar - show user info, hide auth section
+            document.getElementById('sidebarUserInfo').style.display = 'block';
+            document.getElementById('sidebarAuth').style.display = 'none';
+            document.getElementById('sidebarUserName').textContent = currentUser.name;
+            document.getElementById('sidebarUserEmail').textContent = currentUser.email;
+            
+            loadApiKeys();
+            loadUsageStats();
+        }
+
+        function showAuthStatus() {
+            document.getElementById('authStatus').style.display = 'block';
+            document.getElementById('userDashboard').style.display = 'none';
+            
+            // Update sidebar - hide user info, show auth section
+            document.getElementById('sidebarUserInfo').style.display = 'none';
+            document.getElementById('sidebarAuth').style.display = 'block';
+        }
+        
+        function showDashboard() {
+            // Scroll to authentication section to show dashboard
+            document.getElementById('authentication').scrollIntoView({ behavior: 'smooth' });
+        }
+
+        async function loadApiKeys() {
+            try {
+                const response = await fetch('/v1/auth/keys', {
+                    headers: {
+                        'Authorization': `Bearer ${authToken}`
+                    }
+                });
+                
+                if (response.ok) {
+                    const keys = await response.json();
+                    const keysList = document.getElementById('apiKeysList');
+                    
+                    if (keys.length === 0) {
+                        keysList.innerHTML = '<p style="text-align: center; color: #6b7280; font-style: italic;">No API keys yet</p>';
+                    } else {
+                        keysList.innerHTML = keys.map(key => `
+                            <div class="api-key-item">
+                                <div class="api-key-info">
+                                    <div class="api-key-name">${key.name}</div>
+                                    <div class="api-key-details">${key.tier} • ${key.quota_used}/${key.quota_limit} requests used</div>
+                                </div>
+                                <div class="api-key-actions">
+                                    <button class="btn-outline btn-copy" onclick="regenerateAndCopyApiKey(${key.id})" title="Generate new key and copy">Regenerate</button>
+                                    <button class="btn-outline btn-delete" onclick="deleteApiKey(${key.id})" title="Delete this API key">Delete</button>
+                                </div>
+                            </div>
+                        `).join('');
+                    }
+                }
+            } catch (error) {
+                console.error('Failed to load API keys:', error);
+            }
+        }
+
+        async function loadUsageStats() {
+            // Note: This requires an API key, so we'll show general stats for now
+            try {
+                const keysList = document.getElementById('apiKeysList');
+                // For now, show placeholder stats
+                document.getElementById('usageStats').innerHTML = `
+                    <div class="usage-stat">
+                        <span class="usage-label">Total Requests</span>
+                        <span class="usage-value">-</span>
+                    </div>
+                    <div class="usage-stat">
+                        <span class="usage-label">This Month</span>
+                        <span class="usage-value">-</span>
+                    </div>
+                    <div class="usage-stat">
+                        <span class="usage-label">Quota Remaining</span>
+                        <span class="usage-value">-</span>
+                    </div>
+                    <p style="font-size: 12px; color: #6b7280; margin-top: 12px;">
+                        Create an API key to see detailed usage statistics
+                    </p>
+                `;
+            } catch (error) {
+                console.error('Failed to load usage stats:', error);
+            }
+        }
+
+        function showCreateApiKeyForm() {
+            document.getElementById('showCreateKeyBtn').style.display = 'none';
+            document.getElementById('apiKeyForm').style.display = 'block';
+            document.getElementById('newKeyName').focus();
+        }
+        
+        function cancelCreateApiKey() {
+            document.getElementById('apiKeyForm').style.display = 'none';
+            document.getElementById('showCreateKeyBtn').style.display = 'block';
+            document.getElementById('newKeyName').value = '';
+        }
+        
+        async function submitCreateApiKey() {
+            const name = document.getElementById('newKeyName').value.trim();
+            const tier = document.getElementById('newKeyTier').value;
+            
+            if (!name) {
+                alert('Please enter a name for your API key');
+                return;
+            }
+            
+            try {
+                const response = await fetch('/v1/auth/keys', {
+                    method: 'POST',
+                    headers: {
+                        'Authorization': `Bearer ${authToken}`,
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        name: name,
+                        tier: tier
+                    })
+                });
+                
+                if (response.ok) {
+                    const data = await response.json();
+                    document.getElementById('newApiKeyValue').textContent = data.api_key;
+                    document.getElementById('apiKeyForm').style.display = 'none';
+                    document.getElementById('newApiKeyDisplay').style.display = 'block';
+                    loadApiKeys();
+                } else {
+                    const error = await response.json();
+                    alert(error.detail || 'Failed to create API key');
+                }
+            } catch (error) {
+                alert('Failed to create API key: ' + error.message);
+            }
+        }
+        
+        function copyNewApiKey() {
+            const apiKey = document.getElementById('newApiKeyValue').textContent;
+            navigator.clipboard.writeText(apiKey).then(() => {
+                const btn = event.target;
+                btn.textContent = 'Copied!';
+                setTimeout(() => {
+                    btn.textContent = 'Copy';
+                }, 2000);
+            });
+        }
+        
+        function hideNewApiKey() {
+            document.getElementById('newApiKeyDisplay').style.display = 'none';
+            document.getElementById('showCreateKeyBtn').style.display = 'block';
+            document.getElementById('newKeyName').value = '';
+        }
+
+        async function regenerateAndCopyApiKey(keyId) {
+            if (!confirm('This will regenerate your API key. The old key will stop working immediately. Continue?')) {
+                return;
+            }
+            
+            const button = event.target;
+            const originalText = button.textContent;
+            
+            try {
+                button.textContent = 'Regenerating...';
+                button.disabled = true;
+                
+                const response = await fetch(`/v1/auth/keys/${keyId}/regenerate`, {
+                    method: 'POST',
+                    headers: {
+                        'Authorization': `Bearer ${authToken}`
+                    }
+                });
+                
+                if (response.ok) {
+                    const data = await response.json();
+                    
+                    // Try to copy to clipboard with fallback
+                    let copySuccess = false;
+                    try {
+                        if (navigator.clipboard && window.isSecureContext) {
+                            await navigator.clipboard.writeText(data.api_key);
+                            copySuccess = true;
+                        } else {
+                            // Fallback for non-secure contexts
+                            const textArea = document.createElement('textarea');
+                            textArea.value = data.api_key;
+                            textArea.style.position = 'fixed';
+                            textArea.style.left = '-999999px';
+                            textArea.style.top = '-999999px';
+                            document.body.appendChild(textArea);
+                            textArea.focus();
+                            textArea.select();
+                            copySuccess = document.execCommand('copy');
+                            document.body.removeChild(textArea);
+                        }
+                    } catch (err) {
+                        console.error('Failed to copy: ', err);
+                    }
+                    
+                    if (copySuccess) {
+                        button.textContent = 'Copied!';
+                        button.style.background = '#dcfce7';
+                        button.style.color = '#166534';
+                        button.style.borderColor = '#bbf7d0';
+                        
+                        // Show success message
+                        const keyItem = button.closest('.api-key-item');
+                        const successMsg = document.createElement('div');
+                        successMsg.style.cssText = 'color: #059669; font-size: 12px; margin-top: 4px;';
+                        successMsg.textContent = 'New API key copied to clipboard!';
+                        keyItem.appendChild(successMsg);
+                        
+                        setTimeout(() => {
+                            button.textContent = originalText;
+                            button.disabled = false;
+                            button.style.background = '';
+                            button.style.color = '';
+                            button.style.borderColor = '';
+                            if (successMsg.parentNode) {
+                                successMsg.parentNode.removeChild(successMsg);
+                            }
+                        }, 3000);
+                    } else {
+                        // Show the key in a modal if copy fails
+                        alert(`New API Key (copy manually):\n\n${data.api_key}`);
+                        button.textContent = originalText;
+                        button.disabled = false;
+                    }
+                } else {
+                    const error = await response.json();
+                    throw new Error(error.detail || 'Failed to regenerate API key');
+                }
+            } catch (error) {
+                alert('Failed to regenerate API key: ' + error.message);
+                button.textContent = originalText;
+                button.disabled = false;
+            }
+        }
+
+        async function deleteApiKey(keyId) {
+            if (!confirm('Are you sure you want to delete this API key?')) return;
+            
+            try {
+                const response = await fetch(`/v1/auth/keys/${keyId}`, {
+                    method: 'DELETE',
+                    headers: {
+                        'Authorization': `Bearer ${authToken}`
+                    }
+                });
+                
+                if (response.ok) {
+                    loadApiKeys();
+                } else {
+                    alert('Failed to delete API key');
+                }
+            } catch (error) {
+                alert('Failed to delete API key: ' + error.message);
+            }
+        }
     </script>
 </body>
 </html>

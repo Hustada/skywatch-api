@@ -1,9 +1,10 @@
 from datetime import datetime, UTC
 from fastapi import APIRouter
 from pydantic import BaseModel
-from sqlalchemy import select, text
+from sqlalchemy import select, text, func
 from api.database import get_db_session
 from api.models import Sighting
+from api.config import settings
 
 router = APIRouter(tags=["health"])
 
@@ -31,17 +32,16 @@ async def health_check():
             # Test database connection
             await session.execute(text("SELECT 1"))
 
-            # Get sighting count
-            result = await session.execute(select(Sighting))
-            sightings = result.scalars().all()
-            sighting_count = len(sightings)
+            # Get sighting count efficiently
+            result = await session.execute(select(func.count(Sighting.id)))
+            sighting_count = result.scalar() or 0
 
     except Exception:
         database_status = "disconnected"
 
     return HealthResponse(
         status="healthy",
-        version="1.0.0",
+        version=settings.API_VERSION,
         timestamp=datetime.now(UTC).isoformat(),
         database=DatabaseHealth(status=database_status, sighting_count=sighting_count),
     )
