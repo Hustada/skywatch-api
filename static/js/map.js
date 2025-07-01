@@ -695,16 +695,92 @@ function formatQuickAnalysis(analysis) {
 }
 
 function formatResearchReport(report) {
-    // Enhanced formatting for the full research report
-    return report
-        .replace(/\*\*(.*?)\*\*/g, '<h3>$1</h3>')
-        .replace(/\*(.*?)\*/g, '<em>$1</em>')
+    // Advanced formatting for research reports with reference system
+    let references = [];
+    let referenceCount = 0;
+    
+    // Step 1: Extract and number all URLs
+    const urlRegex = /(https?:\/\/[^\s)]+)/g;
+    let formattedReport = report.replace(urlRegex, (url) => {
+        // Clean up URL (remove trailing punctuation)
+        let cleanUrl = url.replace(/[.,;!?]+$/, '');
+        let trailing = url.substring(cleanUrl.length);
+        
+        referenceCount++;
+        references.push({
+            number: referenceCount,
+            url: cleanUrl,
+            title: extractDomainName(cleanUrl)
+        });
+        
+        return `<a href="${cleanUrl}" target="_blank" class="reference-link">[${referenceCount}]</a>${trailing}`;
+    });
+    
+    // Step 2: Clean up excessive whitespace and formatting
+    formattedReport = formattedReport
+        // Handle section headers (bold text that appears to be headers)
+        .replace(/\*\*([\w\s:]+):\*\*/g, '<h3>$1</h3>')
+        .replace(/\*\*([\w\s]+)\*\*/g, '<h3>$1</h3>')
+        
+        // Handle emphasis
+        .replace(/\*([^*]+)\*/g, '<em>$1</em>')
+        
+        // Clean up bullet points
+        .replace(/^\*\s+/gm, '• ')
+        
+        // Handle numbered lists better
+        .replace(/^(\d+\.)\s+(.+)$/gm, '<div class="numbered-item"><strong>$1</strong> $2</div>')
+        
+        // Clean up excessive newlines (3+ newlines become 2)
+        .replace(/\n{3,}/g, '\n\n')
+        
+        // Convert double newlines to paragraph breaks
         .replace(/\n\n/g, '</p><p>')
-        .replace(/\n/g, '<br>')
+        
+        // Convert remaining single newlines to line breaks, but be smarter about it
+        .replace(/\n(?![•\d])/g, '<br>')
+        
+        // Wrap in paragraphs
         .replace(/^/, '<p>')
         .replace(/$/, '</p>')
+        
+        // Fix paragraph wrapping around headers
         .replace(/^<p>(<h3>.*?<\/h3>)/gm, '$1<p>')
-        .replace(/(<\/h3>)<\/p>/g, '$1');
+        .replace(/(<\/h3>)<\/p>/g, '$1')
+        
+        // Clean up empty paragraphs
+        .replace(/<p>\s*<\/p>/g, '')
+        .replace(/<p>(<br>\s*)+<\/p>/g, '')
+        
+        // Fix spacing around numbered items
+        .replace(/<p>(<div class="numbered-item">)/g, '$1')
+        .replace(/(<\/div>)<\/p>/g, '$1');
+    
+    // Step 3: Add references section if we have any
+    if (references.length > 0) {
+        let referencesHtml = '<div class="references-section"><h3>References</h3><ol class="references-list">';
+        
+        references.forEach(ref => {
+            referencesHtml += `<li id="ref-${ref.number}">
+                <a href="${ref.url}" target="_blank" class="reference-url">${ref.title}</a>
+                <br><span class="reference-full-url">${ref.url}</span>
+            </li>`;
+        });
+        
+        referencesHtml += '</ol></div>';
+        formattedReport += referencesHtml;
+    }
+    
+    return formattedReport;
+}
+
+function extractDomainName(url) {
+    try {
+        const domain = new URL(url).hostname;
+        return domain.replace(/^www\./, '');
+    } catch {
+        return url;
+    }
 }
 
 function closeResearchModal() {

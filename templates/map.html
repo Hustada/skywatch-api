@@ -5,6 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>UFO Sightings Map - SkyWatch API</title>
     
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="/static/favicon.png">
+    <link rel="apple-touch-icon" href="/static/favicon.png">
+    
     <!-- Leaflet CSS -->
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" 
           integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" 
@@ -53,6 +57,17 @@
             margin-bottom: 24px;
             padding-bottom: 16px;
             border-bottom: 1px solid #e5e7eb;
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .sidebar-logo {
+            width: 44px;
+            height: 44px;
+            border-radius: 8px;
+            flex-shrink: 0;
+            background: transparent;
         }
 
         .sidebar-title {
@@ -458,6 +473,121 @@
             margin-bottom: 12px;
         }
 
+        /* Enhanced Research Report Formatting */
+        .research-content .numbered-item {
+            margin: 8px 0;
+            padding-left: 16px;
+            border-left: 3px solid #e5e7eb;
+            background: #f9fafb;
+            padding: 8px 12px;
+            border-radius: 4px;
+        }
+
+        .research-content .numbered-item strong {
+            color: #cc5500;
+            margin-right: 8px;
+        }
+
+        .research-content .reference-link {
+            display: inline-block;
+            background: #cc5500;
+            color: white;
+            text-decoration: none;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-size: 11px;
+            font-weight: 600;
+            margin: 0 2px;
+            transition: all 0.2s ease;
+        }
+
+        .research-content .reference-link:hover {
+            background: #ff6b35;
+            transform: translateY(-1px);
+            box-shadow: 0 2px 4px rgba(204, 85, 0, 0.3);
+        }
+
+        .research-content .references-section {
+            margin-top: 32px;
+            padding-top: 24px;
+            border-top: 2px solid #e5e7eb;
+        }
+
+        .research-content .references-section h3 {
+            color: #1a1a1a;
+            font-size: 16px;
+            margin-bottom: 16px;
+            text-transform: none;
+            letter-spacing: normal;
+        }
+
+        .research-content .references-list {
+            list-style: none;
+            counter-reset: ref-counter;
+            margin: 0;
+            padding: 0;
+        }
+
+        .research-content .references-list li {
+            counter-increment: ref-counter;
+            margin: 12px 0;
+            padding: 12px;
+            background: #f8fafc;
+            border-radius: 6px;
+            border: 1px solid #e2e8f0;
+            position: relative;
+        }
+
+        .research-content .references-list li::before {
+            content: "[" counter(ref-counter) "]";
+            position: absolute;
+            left: -8px;
+            top: 8px;
+            background: #cc5500;
+            color: white;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 11px;
+            font-weight: 600;
+        }
+
+        .research-content .reference-url {
+            color: #cc5500;
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 14px;
+        }
+
+        .research-content .reference-url:hover {
+            color: #ff6b35;
+            text-decoration: underline;
+        }
+
+        .research-content .reference-full-url {
+            color: #6b7280;
+            font-size: 12px;
+            word-break: break-all;
+        }
+
+        /* Improved paragraph spacing */
+        .research-content p {
+            margin-bottom: 16px;
+            line-height: 1.7;
+        }
+
+        .research-content p:last-child {
+            margin-bottom: 0;
+        }
+
+        /* Better spacing for headers */
+        .research-content h3:first-child {
+            margin-top: 0;
+        }
+
+        .research-content h3 + p {
+            margin-top: 0;
+        }
+
         .research-actions {
             border-top: 1px solid #e5e7eb;
             padding: 16px 24px;
@@ -581,8 +711,11 @@
         <!-- Sidebar -->
         <div class="sidebar" id="sidebar">
             <div class="sidebar-header">
-                <div class="sidebar-title">UFO Sightings Map</div>
-                <div class="sidebar-subtitle">Explore UFO reports across the globe</div>
+                <img src="/static/skywatch-logo.png" alt="SkyWatch Logo" class="sidebar-logo">
+                <div>
+                    <div class="sidebar-title">UFO Sightings Map</div>
+                    <div class="sidebar-subtitle">Explore UFO reports across the globe</div>
+                </div>
             </div>
 
             <!-- View Toggle -->

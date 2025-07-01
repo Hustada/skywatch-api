@@ -4,6 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SkyWatch API Documentation</title>
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="/static/favicon.png">
+    <link rel="apple-touch-icon" href="/static/favicon.png">
     <style>
         * {
             box-sizing: border-box;
@@ -37,6 +41,34 @@
         .sidebar-header {
             padding: 0 24px 24px 24px;
             border-bottom: 1px solid #e5e7eb;
+        }
+
+        .sidebar-brand {
+            margin-bottom: 16px;
+        }
+
+        .sidebar-content {
+            min-width: 0;
+        }
+
+        .sidebar-map-link {
+            display: block;
+            margin: 16px 0 12px 0;
+            padding: 8px 16px;
+            background: linear-gradient(135deg, #cc5500, #ff6b35);
+            color: white;
+            text-decoration: none;
+            border-radius: 6px;
+            font-size: 13px;
+            font-weight: 500;
+            text-align: center;
+            transition: all 0.2s ease;
+        }
+
+        .sidebar-map-link:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(204, 85, 0, 0.3);
+            color: white;
         }
 
         .sidebar-title {
@@ -413,6 +445,27 @@
             margin-bottom: 60px;
             padding-bottom: 40px;
             border-bottom: 1px solid #e5e7eb;
+        }
+
+        .header-top {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+
+        .header-logo {
+            width: 54px;
+            height: 54px;
+            border-radius: 10px;
+            background: transparent;
+            vertical-align: middle;
+            margin-left: 16px;
+        }
+
+        .header-content {
+            flex: 1;
+            min-width: 0;
         }
 
         .title {
@@ -1404,8 +1457,10 @@
         <!-- Sidebar Navigation -->
         <nav class="sidebar">
             <div class="sidebar-header">
-                <div class="sidebar-title">SkyWatch API</div>
-                <div class="sidebar-subtitle">Documentation</div>
+                <div class="sidebar-brand">
+                    <div class="sidebar-title">SkyWatch API</div>
+                    <div class="sidebar-subtitle">Documentation</div>
+                </div>
                 
                 <!-- User Info (shown when authenticated) -->
                 <div class="sidebar-user-info" id="sidebarUserInfo" style="display: none;">
@@ -1416,6 +1471,9 @@
                         <button class="sidebar-btn btn-logout" onclick="logout()">Sign Out</button>
                     </div>
                 </div>
+                
+                <!-- Interactive Map Link (shown when authenticated) -->
+                <a href="/map" class="sidebar-map-link" id="sidebarMapLink" style="display: none;">🗺️ Interactive Map</a>
                 
                 <!-- Auth Section (shown when not authenticated) -->
                 <div class="sidebar-auth" id="sidebarAuth" style="display: block;">
@@ -1440,7 +1498,6 @@
                 <div class="nav-section-title">Resources</div>
                 <a href="#health" class="nav-item">Health Check</a>
                 <a href="#sightings" class="nav-item">UFO Sightings</a>
-                <a href="/map" class="nav-item" style="background: linear-gradient(135deg, #cc5500, #ff6b35); color: white; font-weight: 600;">🗺️ Interactive Map</a>
             </div>
             
             <div class="nav-section">
@@ -1453,11 +1510,15 @@
         <!-- Main Content -->
         <main class="main-content">
             <div class="header">
-                <h1 class="title">SkyWatch API</h1>
-                <p class="description">
-                    A RESTful API for querying UFO sighting reports. Data sourced from the National UFO Reporting Center (NUFORC).
-                </p>
-                <span class="version-badge">Version 1.0.0</span>
+                <div class="header-top">
+                    <div class="header-content">
+                        <h1 class="title">SkyWatch API <img src="/static/skywatch-logo.png" alt="SkyWatch Logo" class="header-logo"></h1>
+                        <p class="description">
+                            A RESTful API for querying UFO sighting reports. Data sourced from the National UFO Reporting Center (NUFORC).
+                        </p>
+                        <span class="version-badge">Version 1.0.0</span>
+                    </div>
+                </div>
                 
                 <div class="base-url">
                     <span>https://api.skywatch.dev</span>
@@ -2854,6 +2915,7 @@ $data = json_decode($json, true);
             
             // Update sidebar - hide user info, show auth section
             document.getElementById('sidebarUserInfo').style.display = 'none';
+            document.getElementById('sidebarMapLink').style.display = 'none';
             document.getElementById('sidebarAuth').style.display = 'block';
             
             showAuthStatus();
@@ -2865,6 +2927,7 @@ $data = json_decode($json, true);
             
             // Update sidebar - show user info, hide auth section
             document.getElementById('sidebarUserInfo').style.display = 'block';
+            document.getElementById('sidebarMapLink').style.display = 'block';
             document.getElementById('sidebarAuth').style.display = 'none';
             document.getElementById('sidebarUserName').textContent = currentUser.name;
             document.getElementById('sidebarUserEmail').textContent = currentUser.email;
@@ -2879,6 +2942,7 @@ $data = json_decode($json, true);
             
             // Update sidebar - hide user info, show auth section
             document.getElementById('sidebarUserInfo').style.display = 'none';
+            document.getElementById('sidebarMapLink').style.display = 'none';
             document.getElementById('sidebarAuth').style.display = 'block';
         }
         

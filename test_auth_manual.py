@@ -103,7 +103,7 @@ def test_endpoints():
                 print("✅ API key creation successful")
                 key_response = response.json()
                 api_key = key_response['api_key']
-                print(f"   API Key: {api_key[:20]}...")
+                print(f"   API Key: {api_key}")  # Show full key for testing
                 print(f"   Key Name: {key_response['key_info']['name']}")
                 print(f"   Tier: {key_response['key_info']['tier']}")
                 print(f"   Quota Limit: {key_response['key_info']['quota_limit']}")

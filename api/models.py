@@ -127,3 +127,33 @@ class Usage(Base):
 
     def __repr__(self) -> str:
         return f"<Usage(id={self.id}, endpoint={self.endpoint}, status={self.response_status}, timestamp={self.timestamp})>"
+
+
+class ResearchCache(Base):
+    """Cache model for storing AI research results to improve performance."""
+
+    __tablename__ = "research_cache"
+
+    # Primary key
+    id: Mapped[int] = mapped_column(Integer, primary_key=True, autoincrement=True)
+
+    # Sighting reference
+    sighting_id: Mapped[int] = mapped_column(ForeignKey("sightings.id"), nullable=False, index=True)
+    
+    # Research type and results
+    research_type: Mapped[str] = mapped_column(String(20), nullable=False)  # 'quick' or 'full'
+    analysis_result: Mapped[str] = mapped_column(Text, nullable=False)  # JSON string of the analysis
+    
+    # AI model information for cache invalidation
+    model_version: Mapped[str] = mapped_column(String(50), nullable=False)  # e.g., 'gemini-2.0-flash-exp'
+    
+    # Cache metadata
+    cache_hits: Mapped[int] = mapped_column(Integer, default=0, nullable=False)  # Track usage
+    created_at: Mapped[datetime] = mapped_column(DateTime, default=datetime.utcnow, nullable=False, index=True)
+    last_accessed: Mapped[datetime] = mapped_column(DateTime, default=datetime.utcnow, nullable=False)
+    
+    # Relationships
+    sighting: Mapped["Sighting"] = relationship("Sighting")
+
+    def __repr__(self) -> str:
+        return f"<ResearchCache(id={self.id}, sighting_id={self.sighting_id}, type={self.research_type}, hits={self.cache_hits})>"
