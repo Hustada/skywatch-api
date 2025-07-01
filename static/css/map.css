@@ -1,0 +1,231 @@
+/* UFO Sightings Map - Custom Styles */
+
+/* Custom marker cluster styles */
+.marker-cluster-small {
+    background-color: rgba(204, 85, 0, 0.6);
+    border: 2px solid rgba(204, 85, 0, 0.8);
+}
+
+.marker-cluster-small div {
+    background-color: rgba(204, 85, 0, 0.8);
+    color: white;
+    font-weight: bold;
+}
+
+.marker-cluster-medium {
+    background-color: rgba(255, 107, 53, 0.6);
+    border: 2px solid rgba(255, 107, 53, 0.8);
+}
+
+.marker-cluster-medium div {
+    background-color: rgba(255, 107, 53, 0.8);
+    color: white;
+    font-weight: bold;
+}
+
+.marker-cluster-large {
+    background-color: rgba(220, 38, 38, 0.6);
+    border: 2px solid rgba(220, 38, 38, 0.8);
+}
+
+.marker-cluster-large div {
+    background-color: rgba(220, 38, 38, 0.8);
+    color: white;
+    font-weight: bold;
+}
+
+/* Custom popup styles */
+.leaflet-popup-content-wrapper {
+    border-radius: 8px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+}
+
+.leaflet-popup-content {
+    margin: 16px;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;
+    line-height: 1.5;
+}
+
+.leaflet-popup-tip {
+    background: white;
+}
+
+/* Scrollbar styling for sidebar */
+.sidebar::-webkit-scrollbar {
+    width: 6px;
+}
+
+.sidebar::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 3px;
+}
+
+.sidebar::-webkit-scrollbar-thumb {
+    background: #cc5500;
+    border-radius: 3px;
+}
+
+.sidebar::-webkit-scrollbar-thumb:hover {
+    background: #b8490a;
+}
+
+/* Animation for loading states */
+.map-area {
+    position: relative;
+    transition: opacity 0.3s ease;
+}
+
+.map-area.loading {
+    opacity: 0.7;
+}
+
+/* Enhanced mobile styles */
+@media (max-width: 768px) {
+    .leaflet-popup-content-wrapper {
+        max-width: 250px !important;
+    }
+    
+    .leaflet-popup-content {
+        margin: 12px;
+        font-size: 14px;
+    }
+    
+    .leaflet-control-zoom {
+        margin-top: 60px !important;
+    }
+}
+
+/* Dark mode support (can be toggled via JavaScript) */
+@media (prefers-color-scheme: dark) {
+    .sidebar {
+        background-color: #1f2937;
+        border-right-color: #374151;
+        color: #f9fafb;
+    }
+    
+    .sidebar-title {
+        color: #f9fafb;
+    }
+    
+    .sidebar-subtitle {
+        color: #9ca3af;
+    }
+    
+    .filter-title {
+        color: #f3f4f6;
+    }
+    
+    .form-label {
+        color: #9ca3af;
+    }
+    
+    .form-input, .form-select {
+        background: #374151;
+        border-color: #4b5563;
+        color: #f9fafb;
+    }
+    
+    .form-input:focus, .form-select:focus {
+        border-color: #cc5500;
+    }
+    
+    .toggle-btn {
+        background: #374151;
+        border-color: #4b5563;
+        color: #f9fafb;
+    }
+    
+    .toggle-btn.active {
+        background: #cc5500;
+        border-color: #cc5500;
+    }
+    
+    .btn-secondary {
+        background: #374151;
+        border-color: #4b5563;
+        color: #f9fafb;
+    }
+    
+    .btn-secondary:hover {
+        background: #4b5563;
+    }
+    
+    .stats-panel {
+        background: rgba(31, 41, 55, 0.95);
+        color: #f9fafb;
+    }
+    
+    .stats-title {
+        color: #f9fafb;
+    }
+    
+    .stat-label {
+        color: #9ca3af;
+    }
+    
+    .stat-value {
+        color: #f3f4f6;
+    }
+}
+
+/* Accessibility improvements */
+.form-input:focus,
+.form-select:focus,
+.btn:focus,
+.toggle-btn:focus {
+    outline: 2px solid #cc5500;
+    outline-offset: 2px;
+}
+
+/* Print styles */
+@media print {
+    .sidebar {
+        display: none;
+    }
+    
+    .map-area {
+        width: 100% !important;
+    }
+    
+    .stats-panel {
+        position: static !important;
+        background: white !important;
+        box-shadow: none !important;
+        border: 1px solid #ccc !important;
+        margin-top: 10px;
+    }
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+    .sidebar {
+        border-right: 2px solid #000;
+    }
+    
+    .form-input,
+    .form-select {
+        border: 2px solid #000;
+    }
+    
+    .btn {
+        border: 2px solid #000;
+    }
+    
+    .ufo-marker {
+        border: 3px solid #fff;
+        box-shadow: 0 0 0 2px #000;
+    }
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+    .btn,
+    .toggle-btn,
+    .sidebar {
+        transition: none !important;
+    }
+    
+    .loading-spinner {
+        animation: none !important;
+    }
+}

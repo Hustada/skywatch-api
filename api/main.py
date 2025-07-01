@@ -10,7 +10,7 @@ from fastapi.middleware.trustedhost import TrustedHostMiddleware
 from fastapi.exceptions import RequestValidationError
 from starlette.middleware.base import BaseHTTPMiddleware
 from starlette.exceptions import HTTPException as StarletteHTTPException
-from api.routers import health, sightings, auth
+from api.routers import health, sightings, auth, map
 from api.database import create_tables
 from api.middleware import APIKeyMiddleware
 from api.config import settings
@@ -91,6 +91,13 @@ templates = Jinja2Templates(directory="templates")
 async def custom_docs(request: Request):
     return templates.TemplateResponse("docs.html", {"request": request})
 
+
+# Interactive map endpoint
+@app.get("/map", include_in_schema=False)
+async def sightings_map(request: Request):
+    """Interactive map showing UFO sightings geographically."""
+    return templates.TemplateResponse("map.html", {"request": request})
+
 # Keep Swagger UI available at /swagger for development
 @app.get("/swagger", include_in_schema=False)
 async def swagger_ui_html():
@@ -112,3 +119,4 @@ app.add_exception_handler(RequestValidationError, validation_exception_handler)
 app.include_router(health.router)
 app.include_router(auth.router)
 app.include_router(sightings.router)
+app.include_router(map.router)

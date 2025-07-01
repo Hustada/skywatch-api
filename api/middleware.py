@@ -175,6 +175,7 @@ class APIKeyMiddleware:
             "/openapi.json",
             "/swagger",
             "/static",
+            "/map",               # Public map page
             "/v1/auth/register",  # Public registration
             "/v1/auth/login",     # Public login
             "/v1/auth/me",        # JWT token auth (web UI)
