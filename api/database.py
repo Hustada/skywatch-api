@@ -8,16 +8,31 @@ from api.config import settings
 
 # Database configuration
 DATABASE_URL = settings.DATABASE_URL
+
+# Convert database URLs for async drivers
 if DATABASE_URL.startswith("sqlite"):
     DATABASE_URL = DATABASE_URL.replace("sqlite://", "sqlite+aiosqlite://")
+elif DATABASE_URL.startswith("postgresql://"):
+    DATABASE_URL = DATABASE_URL.replace("postgresql://", "postgresql+asyncpg://")
 
-# Create async engine
-engine: AsyncEngine = create_async_engine(
-    DATABASE_URL,
-    echo=False,  # Set to True for SQL query logging during development
-    future=True,
-    pool_pre_ping=True,
-)
+# Create async engine with appropriate settings
+engine_kwargs = {
+    "echo": False,  # Set to True for SQL query logging during development
+    "future": True,
+}
+
+# Add pool settings for PostgreSQL
+if "postgresql" in DATABASE_URL:
+    engine_kwargs.update({
+        "pool_size": 10,
+        "max_overflow": 20,
+        "pool_pre_ping": True,
+        "pool_recycle": 3600,  # 1 hour
+    })
+elif "sqlite" in DATABASE_URL:
+    engine_kwargs["pool_pre_ping"] = True
+
+engine: AsyncEngine = create_async_engine(DATABASE_URL, **engine_kwargs)
 
 # Create async session factory
 AsyncSessionLocal = sessionmaker(engine, class_=AsyncSession, expire_on_commit=False)

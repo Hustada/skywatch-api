@@ -3,6 +3,8 @@ uvicorn
 pydantic
 sqlalchemy
 aiosqlite
+asyncpg
+psycopg2-binary
 python-dotenv
 httpx
 greenlet
