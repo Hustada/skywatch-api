@@ -224,40 +224,42 @@
 
         .features-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 48px;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 32px;
         }
 
         .feature {
             text-align: center;
+            padding: 24px 16px;
         }
 
         .feature-icon {
-            font-size: 3rem;
-            margin-bottom: 24px;
+            font-size: 2.5rem;
+            margin-bottom: 16px;
         }
 
         .feature-title {
-            font-size: 1.5rem;
+            font-size: 1.25rem;
             font-weight: 600;
             color: #1a1a1a;
-            margin-bottom: 16px;
+            margin-bottom: 12px;
         }
 
         .feature-description {
             color: #6b7280;
-            line-height: 1.7;
+            line-height: 1.6;
+            font-size: 14px;
         }
 
         .feature-stat {
             display: inline-block;
             background: linear-gradient(135deg, #cc5500, #ff6b35);
             color: white;
-            padding: 4px 12px;
-            border-radius: 20px;
-            font-size: 14px;
+            padding: 3px 10px;
+            border-radius: 16px;
+            font-size: 12px;
             font-weight: 600;
-            margin-top: 12px;
+            margin-top: 10px;
         }
 
         /* Stats Section */
@@ -362,6 +364,14 @@
                 grid-template-columns: 1fr;
                 gap: 32px;
             }
+        }
+
+        @media (max-width: 1024px) {
+            .features-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 24px;
+            }
+        }
 
             .stats-grid {
                 grid-template-columns: repeat(2, 1fr);
