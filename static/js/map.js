@@ -698,22 +698,40 @@ function formatResearchReport(report) {
     // Advanced formatting for research reports with reference system
     let references = [];
     let referenceCount = 0;
+    let validatedUrls = new Map();
     
-    // Step 1: Extract and number all URLs
+    // Step 1: Extract all URLs first and validate them
     const urlRegex = /(https?:\/\/[^\s)]+)/g;
+    const foundUrls = [...report.matchAll(urlRegex)].map(match => {
+        let cleanUrl = match[1].replace(/[.,;!?]+$/, '');
+        return cleanUrl;
+    });
+    
+    // Step 2: Validate URLs asynchronously (but return promise for better UX)
+    validateUrls(foundUrls).then(validUrls => {
+        validatedUrls = new Map(validUrls.map(url => [url, true]));
+    });
+    
+    // Step 3: Replace URLs with reference links, only for valid ones
     let formattedReport = report.replace(urlRegex, (url) => {
         // Clean up URL (remove trailing punctuation)
         let cleanUrl = url.replace(/[.,;!?]+$/, '');
         let trailing = url.substring(cleanUrl.length);
         
-        referenceCount++;
-        references.push({
-            number: referenceCount,
-            url: cleanUrl,
-            title: extractDomainName(cleanUrl)
-        });
-        
-        return `<a href="${cleanUrl}" target="_blank" class="reference-link">[${referenceCount}]</a>${trailing}`;
+        // Check if URL is likely to be valid (basic heuristics)
+        if (isLikelyValidUrl(cleanUrl)) {
+            referenceCount++;
+            references.push({
+                number: referenceCount,
+                url: cleanUrl,
+                title: extractDomainName(cleanUrl)
+            });
+            
+            return `<a href="${cleanUrl}" target="_blank" class="reference-link">[${referenceCount}]</a>${trailing}`;
+        } else {
+            // Return URL as plain text if likely invalid
+            return cleanUrl + trailing;
+        }
     });
     
     // Step 2: Clean up excessive whitespace and formatting
@@ -781,6 +799,71 @@ function extractDomainName(url) {
     } catch {
         return url;
     }
+}
+
+function isLikelyValidUrl(url) {
+    try {
+        const urlObj = new URL(url);
+        
+        // Filter out common broken URL patterns
+        const invalidPatterns = [
+            /\/ref\/abouttx\/ghosts\.html/,  // Broken Texas.gov paths
+            /\/webreports\/\[/,               // Broken NUFORC paths with brackets
+            /\]\[/,                           // URLs with bracket artifacts
+            /\/\[https:/,                     // Malformed nested URLs
+            /\s/,                             // URLs with spaces
+        ];
+        
+        // Check for invalid patterns
+        for (const pattern of invalidPatterns) {
+            if (pattern.test(url)) {
+                return false;
+            }
+        }
+        
+        // Check for valid domains we trust
+        const trustedDomains = [
+            'ncei.noaa.gov',
+            'timeanddate.com',
+            'weather.gov',
+            'faa.gov',
+            'nasa.gov',
+            'nws.noaa.gov',
+            'nationalweatherservice.com'
+        ];
+        
+        const domain = urlObj.hostname.replace(/^www\./, '');
+        
+        // If it's a trusted domain, likely valid
+        if (trustedDomains.some(trusted => domain.includes(trusted))) {
+            return true;
+        }
+        
+        // Basic URL structure validation
+        return urlObj.protocol.startsWith('http') && 
+               urlObj.hostname.includes('.') &&
+               !urlObj.pathname.includes('[') &&
+               !urlObj.pathname.includes(']');
+               
+    } catch {
+        return false;
+    }
+}
+
+async function validateUrls(urls) {
+    // For now, use heuristic validation
+    // In a production system, you might want to make HEAD requests
+    // to check if URLs are accessible, but that has CORS limitations
+    
+    const validUrls = [];
+    
+    for (const url of urls) {
+        if (isLikelyValidUrl(url)) {
+            validUrls.push(url);
+        }
+    }
+    
+    return validUrls;
 }
 
 function closeResearchModal() {
