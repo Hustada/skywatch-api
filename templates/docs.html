@@ -2417,7 +2417,7 @@ X-RateLimit-Used: 1</div>
             document.getElementById('previewSection').style.display = 'none';
         }
 
-        function showTab(tab) {
+        function showTab(tab, event) {
             currentTab = tab;
             
             // Update active tab
@@ -2531,7 +2531,7 @@ $data = json_decode($json, true);
             document.getElementById('outputCode').textContent = code;
         }
 
-        function copyOutput() {
+        function copyOutput(event) {
             const code = document.getElementById('outputCode').textContent;
             navigator.clipboard.writeText(code).then(() => {
                 const btn = event.target;
@@ -2641,8 +2641,16 @@ $data = json_decode($json, true);
         // Smooth scrolling for navigation
         document.querySelectorAll('.nav-item').forEach(item => {
             item.addEventListener('click', (e) => {
+                const href = item.getAttribute('href');
+                
+                // Check if it's an external link (starts with / but not #)
+                if (href && (href.startsWith('/') && !href.startsWith('/#'))) {
+                    // Let the browser handle external links normally
+                    return;
+                }
+                
                 e.preventDefault();
-                const target = document.querySelector(item.getAttribute('href'));
+                const target = document.querySelector(href);
                 if (target) {
                     target.scrollIntoView({ behavior: 'smooth' });
                     
@@ -2989,7 +2997,7 @@ $data = json_decode($json, true);
             }
         }
         
-        function copyNewApiKey() {
+        function copyNewApiKey(event) {
             const apiKey = document.getElementById('newApiKeyValue').textContent;
             navigator.clipboard.writeText(apiKey).then(() => {
                 const btn = event.target;
@@ -3006,7 +3014,7 @@ $data = json_decode($json, true);
             document.getElementById('newKeyName').value = '';
         }
 
-        async function regenerateAndCopyApiKey(keyId) {
+        async function regenerateAndCopyApiKey(keyId, event) {
             if (!confirm('This will regenerate your API key. The old key will stop working immediately. Continue?')) {
                 return;
             }
