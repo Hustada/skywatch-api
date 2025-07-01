@@ -37,6 +37,8 @@ except Exception as e:
 # This is the ASGI app that Vercel will use
 handler = app
 
+# Deployment trigger comment - environment variables configured
+
 # For local development
 if __name__ == "__main__":
     import uvicorn
