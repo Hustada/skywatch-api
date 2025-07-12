@@ -511,12 +511,8 @@ async function researchSighting(sightingId, location) {
     showResearchModal(null, false);
     
     try {
-        // For now, let's use a test API key - we'll improve this later
-        const response = await fetch(`/v1/research/quick/${sightingId}`, {
-            headers: {
-                'X-API-Key': 'sk_live_aff5306db031a32f565953b83f0b11418b0c4a965c09a5196e93f65cdc84a41f'
-            }
-        });
+        // Public endpoint - no API key needed
+        const response = await fetch(`/v1/research/quick/${sightingId}`);
         
         if (!response.ok) {
             if (response.status === 401) {
@@ -554,11 +550,7 @@ async function getFullResearch() {
     showFullResearchLoading();
     
     try {
-        const response = await fetch(`/v1/research/sighting/${currentSighting.id}`, {
-            headers: {
-                'X-API-Key': 'sk_live_aff5306db031a32f565953b83f0b11418b0c4a965c09a5196e93f65cdc84a41f'
-            }
-        });
+        const response = await fetch(`/v1/research/sighting/${currentSighting.id}`);
         
         if (!response.ok) {
             throw new Error(`Research service unavailable (${response.status})`);

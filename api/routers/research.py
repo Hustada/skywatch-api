@@ -12,7 +12,6 @@ import google.generativeai as genai
 from api.database import get_db
 from api.models import Sighting, ResearchCache
 from api.config import settings
-from api.dependencies import CurrentApiKey
 
 # Configure logging
 logger = logging.getLogger(__name__)
@@ -97,7 +96,6 @@ async def save_research_to_cache(
 )
 async def research_sighting(
     sighting_id: int,
-    api_key: CurrentApiKey,
     db: AsyncSession = Depends(get_db)
 ):
     """Generate AI-powered research report for a UFO sighting."""
@@ -209,7 +207,6 @@ Use web search to find current information and credible sources.
 )
 async def quick_analysis(
     sighting_id: int,
-    api_key: CurrentApiKey,
     db: AsyncSession = Depends(get_db)
 ):
     """Generate quick AI analysis without extensive web research."""
