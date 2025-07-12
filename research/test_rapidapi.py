@@ -12,7 +12,7 @@ from datetime import datetime
 from typing import Dict, List, Optional
 
 # RapidAPI Configuration
-RAPIDAPI_KEY = "YOUR_RAPIDAPI_KEY_HERE"  # Replace with your free tier key
+RAPIDAPI_KEY = "fff83eeb53mshbebc47c00f0f010p12c28djsnad02ed501215"  # Your actual API key
 RAPIDAPI_HOST_UFO_SIGHTINGS = "ufo-sightings.p.rapidapi.com"
 RAPIDAPI_HOST_UFO_AFICIONADO = "ufo-aficionado-api.p.rapidapi.com"
 

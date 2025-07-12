@@ -1,0 +1,19 @@
+{
+  "last_updated": "2025-07-12T13:41:10.027911",
+  "sources": {
+    "mufon": {
+      "api_endpoint": "https://ufo-sightings.p.rapidapi.com",
+      "description": "MUFON UFO sightings database via RapidAPI",
+      "last_fetch": null,
+      "total_records": 0,
+      "status": "pending"
+    },
+    "rapidapi_ufo_aficionado": {
+      "api_endpoint": "https://ufo-aficionado-api.p.rapidapi.com",
+      "description": "UFO Aficionado API with 88K reports",
+      "last_fetch": null,
+      "total_records": 0,
+      "status": "pending"
+    }
+  }
+}

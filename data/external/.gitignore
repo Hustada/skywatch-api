@@ -1,0 +1,8 @@
+# Ignore very large data files (>100MB)
+*.json.large
+raw/*_batch_*.json
+# Keep small test files and processed data
+!processed/
+!metadata/
+!*_sample.json
+!*_test.json
