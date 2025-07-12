@@ -1,0 +1,43 @@
+# Exclude large data files from Vercel deployment
+data/external/rapidapi/raw/
+data/external/rapidapi/processed/
+data/external/mufon/
+data/external/backups/
+*.db
+*.sql
+sightings.db
+nuforc.db
+sightings_export.sql
+
+# Exclude large documentation files
+docs/ufo-dataset.zip
+docs/complete.csv
+docs/scrubbed.csv
+docs/hero-image1.png
+
+# Exclude development/research files
+research/
+bulk_*.py
+curate_*.py
+geocode_*.py
+run_import.py
+simple_import.py
+test_import.py
+check_api_usage.py
+pricing_estimate.py
+*.json
+quick_scope_*.json
+sample_ufo_data_*.json
+
+# Exclude development dependencies
+venv/
+.pytest_cache/
+__pycache__/
+*.pyc
+*.pyo
+
+# Exclude temporary files
+*.tmp
+*.log
+.env.local
+.env.development
