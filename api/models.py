@@ -33,6 +33,11 @@ class Sighting(Base):
     latitude: Mapped[Optional[float]] = mapped_column(Float, nullable=True, index=True)
     longitude: Mapped[Optional[float]] = mapped_column(Float, nullable=True, index=True)
 
+    # Source tracking for multi-source data
+    source: Mapped[str] = mapped_column(String(50), nullable=False, default="nuforc", index=True)
+    external_id: Mapped[Optional[str]] = mapped_column(String(100), nullable=True, index=True)
+    source_url: Mapped[Optional[str]] = mapped_column(String(500), nullable=True)
+
     def __repr__(self) -> str:
         return (
             f"<Sighting(id={self.id}, city={self.city}, state={self.state}, "

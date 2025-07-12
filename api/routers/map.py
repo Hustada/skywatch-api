@@ -83,6 +83,7 @@ async def get_map_data(
     state: Optional[str] = Query(None, description="Filter by state"),
     city: Optional[str] = Query(None, description="Filter by city name"),
     shape: Optional[str] = Query(None, description="Filter by object shape"),
+    source: Optional[str] = Query(None, description="Filter by data source (nuforc, ufo_aficionado_api)"),
     date_from: Optional[datetime] = Query(None, description="Filter from date"),
     date_to: Optional[datetime] = Query(None, description="Filter to date"),
     # Map-specific parameters
@@ -132,6 +133,9 @@ async def get_map_data(
     
     if shape:
         filters.append(Sighting.shape.ilike(f"%{shape}%"))
+    
+    if source:
+        filters.append(Sighting.source == source)
     
     if date_from:
         filters.append(Sighting.date_time >= date_from)
@@ -283,6 +287,7 @@ async def get_hotspots(
 async def get_map_stats(
     state: Optional[str] = Query(None, description="Filter by state"),
     shape: Optional[str] = Query(None, description="Filter by object shape"),
+    source: Optional[str] = Query(None, description="Filter by data source"),
     date_from: Optional[datetime] = Query(None, description="Filter from date"),
     date_to: Optional[datetime] = Query(None, description="Filter to date"),
     db: AsyncSession = Depends(get_db),
@@ -315,6 +320,9 @@ async def get_map_stats(
     if shape:
         filters.append(Sighting.shape.ilike(f"%{shape}%"))
     
+    if source:
+        filters.append(Sighting.source == source)
+    
     if date_from:
         filters.append(Sighting.date_time >= date_from)
     
@@ -338,6 +346,15 @@ async def get_map_stats(
     shape_result = await db.execute(shape_query)
     shape_stats = [{"shape": row.shape, "count": row.count} for row in shape_result]
     
+    # Get source distribution
+    source_query = select(
+        Sighting.source,
+        func.count(Sighting.id).label('count')
+    ).select_from(base_query.subquery()).group_by(Sighting.source).order_by(func.count(Sighting.id).desc())
+    
+    source_result = await db.execute(source_query)
+    source_stats = [{"source": row.source, "count": row.count} for row in source_result]
+    
     # Get date range
     date_query = select(
         func.min(Sighting.date_time).label('earliest'),
@@ -350,6 +367,7 @@ async def get_map_stats(
     return {
         "total_sightings": total_sightings,
         "shape_distribution": shape_stats,
+        "source_distribution": source_stats,
         "date_range": {
             "earliest": date_range.earliest.isoformat() if date_range.earliest else None,
             "latest": date_range.latest.isoformat() if date_range.latest else None
@@ -379,7 +397,8 @@ def create_geojson_response(sightings: List[Sighting]) -> Dict[str, Any]:
                 "date_time": sighting.date_time.isoformat(),
                 "duration": sighting.duration,
                 "summary": sighting.summary,
-                "posted": sighting.posted.isoformat()
+                "posted": sighting.posted.isoformat(),
+                "source": sighting.source
             }
         }
         features.append(feature)
@@ -411,7 +430,8 @@ def create_simple_response(sightings: List[Sighting]) -> Dict[str, Any]:
             "shape": sighting.shape,
             "date_time": sighting.date_time.isoformat(),
             "duration": sighting.duration,
-            "summary": sighting.summary
+            "summary": sighting.summary,
+            "source": sighting.source
         })
     
     return {

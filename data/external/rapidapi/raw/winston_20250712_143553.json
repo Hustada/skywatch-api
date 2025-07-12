@@ -1,0 +1,43 @@
+{
+  "city": "winston",
+  "fetch_timestamp": "2025-07-12T14:35:53.627618",
+  "record_count": 3,
+  "pages_fetched": 0,
+  "api_calls": 1,
+  "source": "ufo_aficionado_api",
+  "records": [
+    {
+      "_id": "64d005f478aba2ec5a3ba3a6",
+      "summary": "Meteor or Fireball between Cuchillo and Winston NM March 28 2009  about 9:30 PM very light and very big.",
+      "city": "winston",
+      "shape": "fireball",
+      "date": "2009-04-14T00:00:00",
+      "story": "Meteor or Fireball between Cuchillo and Winston NM March 28 2009  about 9:30 PM very light and very big. On our way home about 9:30 at night between Cuchillo NM and Winston NM just off Tucker Flat the sky in front of our truck's windshield lit completely up as if daytime had just erupted.  My husband and I couldn't believe it was so light if only for an instant.  My son (10) looking south out of the backseat said that was cool.  Then we realized he actually saw the fireball not just the light flash like we did. He drew a picture of it for us and it was a roundish, white orb, with some red near the tail, with a tail about as long as the orb.  If you circle your finger in the OK sign that is how big he described it as being before it went behind the mountain, it was traveling approximately in the same direction we were west, but was out of sight quickly since we were in the foothills of the Black Range it was lost behind the mountain too quickly for the rest of us to see it. I could tell it was very big just due to the light it emitted.",
+      "link": "http://www.nuforc.org/webreports/069/S69476.html",
+      "state": "NM",
+      "duration": "3-5 seconds"
+    },
+    {
+      "_id": "64d005f478aba2ec5a3c031e",
+      "summary": "Reddish orange & white, cylinder light, appeared in the S sky and hovered silently for 3-4 minutes before leaving sight eastbound.",
+      "city": "winston",
+      "shape": "cylinder",
+      "date": "2013-05-15T00:00:00",
+      "story": "Reddish Orange & White, cylinder light, appeared in the Southern sky and hovered silently for 3-4 minutes before leaving sight eastbound Redish orange  and white, cylindrical shaped light seemed to appear from nowhere very low in the southern sky above the River Bend RV Park.  It then proceeded silently to curve towards the east while making manuevers unmanageable by a plane and flying too low.  It hovered mid sky motionless for 3-5 minutes.   It then proceeded to very slowly move again towards the east and became dimmer with random bright flashes until out of sight.",
+      "link": "http://www.nuforc.org/webreports/097/S97671.html",
+      "state": "OR",
+      "duration": "15 minutes"
+    },
+    {
+      "_id": "64d005f478aba2ec5a3c3fc7",
+      "summary": "It was a very bright glowing white light traveling from east to west at a high rate of speed.  ((NUFORC Note:  Overflight of ISS.  PD))",
+      "city": "winston",
+      "shape": "light",
+      "date": "2015-06-15T00:00:00",
+      "story": "My girlfriend and I were sitting on the porch.  It was a clear night with no clouds or haze in the sky.  She pointed to a bright light way out on the west horizon that seemed to be moving.   I grabbed my binoculars to get a better look at it.  I continued to watch it thru my binoculars, as it traveled across the sky. It was a very bright glowing white light traveling from east to west at a high rate of speed. It maintained it's speed, elevation, and direction.  It appeared to be traveling at a lower elevation then what commercial aircraft travel at.  About 1 minute after it passed overhead, it changed into an orange color and then faded out. I have been in the Air Force for 18 years.  I have spent a lot of years working on aircraft.  I have been around many different aircraft, from cargo to fighters.  I can distinguish between an airplane, satellite, and meteor.  It was none of these. ((NUFORC Note:  Overflight of ISS.   http://heavens-above.com/PassSummary.aspx?satid=25544&lat=43.1223&lng=-123.4126&loc=Winston&alt=169&tz=PST PD))",
+      "link": "http://www.nuforc.org/webreports/119/S119564.html",
+      "state": "OR",
+      "duration": "5 minutes"
+    }
+  ]
+}

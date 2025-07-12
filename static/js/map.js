@@ -129,6 +129,7 @@ class UFOMap {
             if (filters.date_from) params.append('date_from', filters.date_from);
             if (filters.date_to) params.append('date_to', filters.date_to);
             if (filters.shape) params.append('shape', filters.shape);
+            if (filters.source) params.append('source', filters.source);
             if (filters.state) params.append('state', filters.state);
             if (filters.city) params.append('city', filters.city);
 
@@ -192,9 +193,10 @@ class UFOMap {
         const lat = parseFloat(sighting.latitude);
         const lng = parseFloat(sighting.longitude);
         
-        // Create custom icon based on shape
+        // Create custom icon based on shape and source
         const iconClass = this.getShapeIconClass(sighting.shape);
-        const iconHtml = `<div class="ufo-marker ${iconClass}">${this.getShapeSymbol(sighting.shape)}</div>`;
+        const sourceClass = this.getSourceClass(sighting.source);
+        const iconHtml = `<div class="ufo-marker ${iconClass} ${sourceClass}">${this.getShapeSymbol(sighting.shape)}</div>`;
         
         const customIcon = L.divIcon({
             html: iconHtml,
@@ -238,9 +240,24 @@ class UFOMap {
         return symbolMap[shape?.toLowerCase()] || '?';
     }
 
+    getSourceClass(source) {
+        const sourceMap = {
+            'nuforc': 'marker-nuforc',
+            'ufo_aficionado': 'marker-aficionado'
+        };
+        return sourceMap[source] || 'marker-unknown';
+    }
+
     createPopupContent(sighting) {
         const date = new Date(sighting.date_time).toLocaleDateString();
         const time = new Date(sighting.date_time).toLocaleTimeString();
+        
+        // Format source for display
+        const sourceDisplay = sighting.source === 'nuforc' ? 'NUFORC' : 
+                             sighting.source === 'ufo_aficionado' ? 'UFO Aficionado' : 
+                             sighting.source || 'Unknown';
+        
+        const sourceColor = sighting.source === 'nuforc' ? '#0066cc' : '#cc5500';
         
         return `
             <div style="min-width: 250px;">
@@ -250,7 +267,8 @@ class UFOMap {
                 <div style="margin-bottom: 8px;">
                     <strong>Date:</strong> ${date} at ${time}<br>
                     <strong>Shape:</strong> ${sighting.shape}<br>
-                    <strong>Duration:</strong> ${sighting.duration}
+                    <strong>Duration:</strong> ${sighting.duration}<br>
+                    <strong>Source:</strong> <span style="color: ${sourceColor}; font-weight: bold;">${sourceDisplay}</span>
                 </div>
                 <div style="margin-bottom: 8px;">
                     <strong>Description:</strong><br>
@@ -459,6 +477,7 @@ async function applyFilters() {
         date_from: document.getElementById('date-from').value,
         date_to: document.getElementById('date-to').value,
         shape: document.getElementById('shape-filter').value,
+        source: document.getElementById('source-filter').value,
         state: document.getElementById('state-filter').value,
         city: document.getElementById('city-search').value
     };
@@ -475,6 +494,7 @@ function clearFilters() {
     document.getElementById('date-from').value = '';
     document.getElementById('date-to').value = '';
     document.getElementById('shape-filter').value = '';
+    document.getElementById('source-filter').value = '';
     document.getElementById('state-filter').value = '';
     document.getElementById('city-search').value = '';
     document.getElementById('date-preset').value = '';

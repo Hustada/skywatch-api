@@ -313,6 +313,49 @@
         .marker-light { background: #f59e0b; }
         .marker-other { background: #6b7280; }
 
+        /* Source-based styling - adds border colors */
+        .marker-nuforc { border: 2px solid #0066cc; }
+        .marker-aficionado { border: 2px solid #cc5500; }
+        .marker-unknown { border: 2px solid #666666; }
+
+        /* Legend Panel */
+        .legend-panel {
+            position: absolute;
+            bottom: 160px;
+            right: 20px;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 12px;
+            border-radius: 8px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            z-index: 1000;
+            min-width: 200px;
+        }
+
+        .legend-title {
+            font-size: 12px;
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: #374151;
+        }
+
+        .legend-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 6px;
+            gap: 8px;
+            font-size: 11px;
+            color: #4b5563;
+        }
+
+        .legend-marker {
+            width: 14px;
+            height: 14px;
+            border-radius: 50%;
+            background: #3b82f6;
+            flex-shrink: 0;
+        }
+
         /* Research Modal Styles */
         .research-modal {
             display: none;
@@ -779,6 +822,19 @@
                 </div>
             </div>
 
+            <!-- Source Filter -->
+            <div class="filter-section">
+                <div class="filter-title">Data Source</div>
+                <div class="form-group">
+                    <label class="form-label">Source</label>
+                    <select id="source-filter" class="form-select" onchange="applyFilters()">
+                        <option value="">All Sources</option>
+                        <option value="nuforc">NUFORC</option>
+                        <option value="ufo_aficionado">UFO Aficionado</option>
+                    </select>
+                </div>
+            </div>
+
             <!-- Location Filter -->
             <div class="filter-section">
                 <div class="filter-title">Location</div>
@@ -826,6 +882,19 @@
             
             <!-- Map Container -->
             <div id="map"></div>
+
+            <!-- Data Source Legend -->
+            <div class="legend-panel">
+                <div class="legend-title">Data Sources</div>
+                <div class="legend-item">
+                    <div class="legend-marker marker-nuforc"></div>
+                    <span>NUFORC (National UFO Reporting Center)</span>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-marker marker-aficionado"></div>
+                    <span>UFO Aficionado API</span>
+                </div>
+            </div>
 
             <!-- Stats Panel -->
             <div class="stats-panel" id="stats-panel">

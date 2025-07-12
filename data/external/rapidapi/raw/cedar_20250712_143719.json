@@ -1,0 +1,21 @@
+{
+  "city": "cedar",
+  "fetch_timestamp": "2025-07-12T14:37:19.080207",
+  "record_count": 1,
+  "pages_fetched": 0,
+  "api_calls": 1,
+  "source": "ufo_aficionado_api",
+  "records": [
+    {
+      "_id": "64d005f478aba2ec5a3b6c67",
+      "summary": "very scary, and mysterious",
+      "city": "cedar",
+      "shape": "changing",
+      "date": "2007-11-28T00:00:00",
+      "story": "very scary, and mysterious My friends and I were sitting on the porch and looking at the sky when we saw a almost dark but lighted kite shaped arrow start at the left part of the sky and move to the right then just disappear.  this happened several times.",
+      "link": "http://www.nuforc.org/webreports/059/S59665.html",
+      "state": "UT",
+      "duration": "09:00pm"
+    }
+  ]
+}

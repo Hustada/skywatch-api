@@ -1,0 +1,21 @@
+{
+  "city": "baton",
+  "fetch_timestamp": "2025-07-12T14:36:07.105940",
+  "record_count": 1,
+  "pages_fetched": 0,
+  "api_calls": 1,
+  "source": "ufo_aficionado_api",
+  "records": [
+    {
+      "_id": "64d005f478aba2ec5a3b6747",
+      "summary": "slow-moving comet like tail with single strobe over western north carolina.  ((NUFORC Note:  Missile venting fuel in space.  PD))",
+      "city": "baton",
+      "shape": "other",
+      "date": "2008-01-21T00:00:00",
+      "story": "slow-moving comet like tail with single strobe over western north carolina I walked outside around 1920 eastern time, looked up, and my eye was caught by what looked like a bright comet with a very well-defined conical tail (it looked like the pictures i've seen of comet Kohoutek).   It was similar in size to a full moon.   I went in and got my binoculars (12 power) and resumed watching.  With binoculars, I was able to see that the object was moving slowly, referencing the stars nearby.   Over the course of 20 or 25 minutes, the object moved in an ENE direction from near the constellation Pegasus until it became too faint to see in the middle of the constellation Cassiopeia.   Several times during viewing, I observed a single bright flash like an aircraft strobe, and twice I saw objects not unlike satellites in brightness and speed pass moving west to within a degree (a full moon being around 1/2 a degree) of the object. ((NUFORC Note:  Missile venting fuel in space.  PD))",
+      "link": "http://www.nuforc.org/webreports/060/S60267.html",
+      "state": "NC",
+      "duration": "25 min"
+    }
+  ]
+}
