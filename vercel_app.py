@@ -1,41 +1,17 @@
 """
 Vercel-specific entry point for the FastAPI application.
-This ensures the entire app runs as a single serverless function.
 """
 
-# Import the FastAPI app
-try:
-    from api.main import app
-except Exception as e:
-    # Create a fallback app if main app fails to load
-    from fastapi import FastAPI
-    from fastapi.responses import JSONResponse
-    
-    app = FastAPI(title="SkyWatch API - Error")
-    
-    @app.get("/")
-    async def error_handler():
-        return JSONResponse(
-            content={
-                "error": "application_startup_failed",
-                "message": f"Failed to initialize application: {str(e)}",
-                "details": "Check environment variables and database configuration"
-            },
-            status_code=500
-        )
-    
-    @app.get("/health")
-    async def health_check():
-        return JSONResponse(
-            content={
-                "status": "error",
-                "message": f"Application failed to start: {str(e)}"
-            },
-            status_code=500
-        )
+import os
 
-# This is the ASGI app that Vercel will use
-handler = app
+# Set environment to production for Vercel
+os.environ.setdefault("ENVIRONMENT", "production")
+
+# Import the FastAPI app directly
+from api.main import app
+
+# Vercel expects the ASGI app to be available as 'app'
+# No need for a handler function wrapper
 
 # Deployment trigger comment - environment variables configured
 

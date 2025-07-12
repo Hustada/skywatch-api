@@ -11,9 +11,11 @@ from fastapi.exceptions import RequestValidationError
 from starlette.middleware.base import BaseHTTPMiddleware
 from starlette.exceptions import HTTPException as StarletteHTTPException
 from api.routers import health, sightings, auth, map, research
-from api.database import create_tables
+from api.database import create_tables, get_db_session
 from api.middleware import APIKeyMiddleware
 from api.config import settings
+from api.models import Sighting
+from datetime import datetime
 from api.errors import (
     APIException,
     api_exception_handler,
@@ -21,6 +23,46 @@ from api.errors import (
     validation_exception_handler,
     generic_exception_handler
 )
+
+
+async def load_demo_data():
+    """Load sample UFO sighting data for production demo."""
+    demo_sightings = [
+        {
+            "date_time": datetime(2023, 7, 4, 21, 30),
+            "city": "Phoenix", "state": "AZ", "shape": "triangle",
+            "duration": "5 minutes", "summary": "Large triangular craft with bright lights",
+            "text": "Witnessed a large triangular craft with three bright lights at each corner moving silently across the night sky.",
+            "posted": datetime(2023, 7, 5), "latitude": 33.4484, "longitude": -112.0740,
+            "source": "nuforc"
+        },
+        {
+            "date_time": datetime(2023, 8, 15, 22, 45),
+            "city": "Los Angeles", "state": "CA", "shape": "disk",
+            "duration": "2 minutes", "summary": "Metallic disk hovering above highway",
+            "text": "A metallic disk-shaped object was observed hovering motionless above the 405 freeway before accelerating rapidly.",
+            "posted": datetime(2023, 8, 16), "latitude": 34.0522, "longitude": -118.2437,
+            "source": "ufo_aficionado"
+        },
+        {
+            "date_time": datetime(2023, 9, 22, 20, 15),
+            "city": "Chicago", "state": "IL", "shape": "light",
+            "duration": "10 minutes", "summary": "Pulsating orange lights in formation",
+            "text": "Multiple orange lights pulsating in a V-formation moved slowly across Lake Michigan.",
+            "posted": datetime(2023, 9, 23), "latitude": 41.8781, "longitude": -87.6298,
+            "source": "nuforc"
+        }
+    ]
+    
+    try:
+        async with get_db_session() as session:
+            for sighting_data in demo_sightings:
+                sighting = Sighting(**sighting_data)
+                session.add(sighting)
+            await session.commit()
+            print(f"✅ Loaded {len(demo_sightings)} demo sightings")
+    except Exception as e:
+        print(f"⚠️ Could not load demo data: {e}")
 
 
 @asynccontextmanager
@@ -33,7 +75,8 @@ async def lifespan(app: FastAPI):
         
         # In production with in-memory database, add some demo data
         if settings.ENVIRONMENT == "production":
-            print("Production mode: Using in-memory database with minimal demo data")
+            print("Production mode: Using in-memory database with demo data")
+            await load_demo_data()
             
     except Exception as e:
         print(f"Database initialization warning: {e}")

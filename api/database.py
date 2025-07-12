@@ -7,7 +7,11 @@ from api.config import settings
 
 
 # Database configuration
-DATABASE_URL = settings.database_url
+try:
+    DATABASE_URL = settings.database_url
+except:
+    # Fallback if settings fail
+    DATABASE_URL = "sqlite:///:memory:"
 
 # Convert database URLs for async drivers
 if DATABASE_URL.startswith("sqlite"):
@@ -17,17 +21,23 @@ elif DATABASE_URL.startswith("postgresql://"):
 
 # Create async engine with appropriate settings
 engine_kwargs = {
-    "echo": False,  # Set to True for SQL query logging during development
+    "echo": False,
     "future": True,
 }
 
 # Add pool settings for PostgreSQL
 if "postgresql" in DATABASE_URL:
     engine_kwargs.update({
-        "pool_size": 10,
-        "max_overflow": 20,
+        "pool_size": 5,
+        "max_overflow": 10,
         "pool_pre_ping": True,
-        "pool_recycle": 3600,  # 1 hour
+        "pool_recycle": 3600,
+    })
+elif "sqlite" in DATABASE_URL and ":memory:" in DATABASE_URL:
+    # Special handling for in-memory SQLite
+    engine_kwargs.update({
+        "pool_pre_ping": False,
+        "poolclass": None,  # Disable pooling for in-memory
     })
 elif "sqlite" in DATABASE_URL:
     engine_kwargs["pool_pre_ping"] = True
