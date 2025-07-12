@@ -23,6 +23,15 @@ class Settings:
     # Database
     DATABASE_URL: str = os.getenv("DATABASE_URL", "sqlite:///:memory:")
     
+    @property
+    def database_url(self) -> str:
+        """Get the appropriate database URL for the environment."""
+        if self.ENVIRONMENT == "production":
+            # For Vercel deployment, use in-memory SQLite
+            # In a real production setup, you'd use a cloud database
+            return "sqlite:///:memory:"
+        return self.DATABASE_URL
+    
     # API Settings
     API_TITLE: str = "SkyWatch API"
     API_VERSION: str = "1.0.0"

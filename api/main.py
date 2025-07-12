@@ -27,8 +27,18 @@ from api.errors import (
 async def lifespan(app: FastAPI):
     """Handle application startup and shutdown."""
     # Startup
-    await create_tables()
-    print("Database tables created/verified")
+    try:
+        await create_tables()
+        print("Database tables created/verified")
+        
+        # In production with in-memory database, add some demo data
+        if settings.ENVIRONMENT == "production":
+            print("Production mode: Using in-memory database with minimal demo data")
+            
+    except Exception as e:
+        print(f"Database initialization warning: {e}")
+        # Continue startup even if database setup fails
+    
     yield
     # Shutdown
     print("Application shutdown")

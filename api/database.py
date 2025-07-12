@@ -7,7 +7,7 @@ from api.config import settings
 
 
 # Database configuration
-DATABASE_URL = settings.DATABASE_URL
+DATABASE_URL = settings.database_url
 
 # Convert database URLs for async drivers
 if DATABASE_URL.startswith("sqlite"):

@@ -1,0 +1,70 @@
+{
+  "timestamp": "20250712_134931",
+  "results": [
+    {
+      "city": "losangeles",
+      "pages_tested": 3,
+      "total_records": 60,
+      "error": null
+    },
+    {
+      "city": "newyork",
+      "pages_tested": 3,
+      "total_records": 60,
+      "error": null
+    },
+    {
+      "city": "chicago",
+      "pages_tested": 3,
+      "total_records": 60,
+      "error": null
+    },
+    {
+      "city": "houston",
+      "pages_tested": 3,
+      "total_records": 60,
+      "error": null
+    },
+    {
+      "city": "phoenix",
+      "pages_tested": 3,
+      "total_records": 60,
+      "error": null
+    },
+    {
+      "city": "philadelphia",
+      "pages_tested": 3,
+      "total_records": 60,
+      "error": null
+    },
+    {
+      "city": "seattle",
+      "pages_tested": 3,
+      "total_records": 60,
+      "error": null
+    },
+    {
+      "city": "denver",
+      "pages_tested": 3,
+      "total_records": 60,
+      "error": null
+    },
+    {
+      "city": "miami",
+      "pages_tested": 3,
+      "total_records": 60,
+      "error": null
+    },
+    {
+      "city": "atlanta",
+      "pages_tested": 3,
+      "total_records": 60,
+      "error": null
+    }
+  ],
+  "summary": {
+    "cities_tested": 10,
+    "cities_with_data": 10,
+    "total_records": 600
+  }
+}
